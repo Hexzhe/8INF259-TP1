@@ -151,12 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DossierClient.h" />
+    <ClInclude Include="Models.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="8INF259-TP1.cpp" />
+    <ClCompile Include="DossierClient.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="pch.cpp">

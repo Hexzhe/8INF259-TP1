@@ -19,15 +19,33 @@
     <Filter Include="Resource Files\Data\Templates">
       <UniqueIdentifier>{d9b6d436-86eb-46bb-924c-88af3ae9fbc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DataStructures">
+      <UniqueIdentifier>{1a692ebf-9f47-4285-ab3d-261899622a92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataStructures">
+      <UniqueIdentifier>{a756db94-4c92-42d9-9db3-6273c7ba3c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataStructures\LinkedList">
+      <UniqueIdentifier>{1d29d88d-e015-4d81-9884-77313a9b80e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataStructures\LinkedList">
+      <UniqueIdentifier>{afdc3223-914a-4568-91c8-7780ff4dc2ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="DossierClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
+      <Filter>Header Files\DataStructures\LinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Header Files\DataStructures\LinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,11 +56,14 @@
     <ClCompile Include="8INF259-TP1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
+    <ClCompile Include="DossierClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DataStructures\LinkedList</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>Source Files\DataStructures\LinkedList</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
