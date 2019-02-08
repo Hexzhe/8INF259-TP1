@@ -166,6 +166,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceFiles\8INF259_Travail_1.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ResourceFiles\Data\CLIENT.txt" />
+    <Text Include="ResourceFiles\Data\HISTORIQUE.txt" />
+    <Text Include="ResourceFiles\Data\Templates\CLIENT.txt" />
+    <Text Include="ResourceFiles\Data\Templates\HISTORIQUE.txt" />
+    <Text Include="ResourceFiles\Data\Templates\TRANSACTION.txt" />
+    <Text Include="ResourceFiles\Data\TRANSACTION.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

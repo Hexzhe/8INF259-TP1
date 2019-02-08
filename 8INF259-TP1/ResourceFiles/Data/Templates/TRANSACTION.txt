@@ -1,0 +1,8 @@
+O CLIENT HISTORIQUE
++ "Client 5"
+= "Client 5" "Client 0" "Message 0"
+& "Client 0" "Client 5"
+!
+$
+- "Client 5"
+S CLIENT HISTORIQUE

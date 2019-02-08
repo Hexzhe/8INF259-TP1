@@ -1,0 +1,16 @@
+Village
+Rue 0
+Numero 0
+Nom du client 0
+Rue 1
+Numero 1
+Nom du client 1
+Rue 2
+Numero 2
+Nom du client 2
+Rue 3
+Numero 3
+Nom du client 3
+Rue 4
+Numero 4
+Nom du client 4

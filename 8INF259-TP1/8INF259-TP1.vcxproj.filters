@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Data">
+      <UniqueIdentifier>{87b6571e-951b-4c1b-84b2-f6faa1bf72cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Data\Templates">
+      <UniqueIdentifier>{d9b6d436-86eb-46bb-924c-88af3ae9fbc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -38,5 +44,30 @@
     <ClCompile Include="Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceFiles\8INF259_Travail_1.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ResourceFiles\Data\CLIENT.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="ResourceFiles\Data\HISTORIQUE.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="ResourceFiles\Data\TRANSACTION.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="ResourceFiles\Data\Templates\CLIENT.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
+    </Text>
+    <Text Include="ResourceFiles\Data\Templates\HISTORIQUE.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
+    </Text>
+    <Text Include="ResourceFiles\Data\Templates\TRANSACTION.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
+    </Text>
   </ItemGroup>
 </Project>
