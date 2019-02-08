@@ -43,7 +43,7 @@ void List<T>::Insert(const T & item)
 template <class T>
 bool List<T>::IsInRange() const
 {
-	return (Current != nullptr) & (Current->Next != nullptr); 
+	return (Current != nullptr) && (Current->Next != nullptr); 
 }
 
 template <class T>
