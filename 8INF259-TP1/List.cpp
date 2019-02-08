@@ -30,7 +30,7 @@ List<T>::~List()
 }
 
 template <class T>
-void List<T>::Insert(const T& item)
+void List<T>::Insert(const T & item)
 {
 	assert(Current != nullptr); //Abort if we aren't in the list
 
@@ -52,7 +52,7 @@ T List<T>::Remove()
 	assert(IsInRange());
 
 	T tmp = Current->Next->Item;
-	Node<T>* pTmp = Current->Next;
+	Node<T> * pTmp = Current->Next;
 	Current->Next = pTmp->Next;
 
 	if (Tail == pTmp)
@@ -63,7 +63,7 @@ T List<T>::Remove()
 }
 
 template <class T>
-void List<T>::Add(const T& item)
+void List<T>::Add(const T & item)
 {
 	Tail = Tail->Next = new Node<T>(item, nullptr);
 }
@@ -77,7 +77,7 @@ void List<T>::MovePrevious()
 		return;
 	}
 
-	Node<T>* tmp = Head;
+	Node<T> * tmp = Head;
 	while ((tmp != nullptr) && (tmp->Next != Current))
 		tmp = tmp->Next;
 
@@ -95,7 +95,7 @@ template <class T>
 int List<T>::Count() const
 {
 	int count = 0;
-	for (Node<T>* tmp = Head->Next; tmp != nullptr; tmp = tmp->Next)
+	for (Node<T> * tmp = Head->Next; tmp != nullptr; tmp = tmp->Next)
 		count++;
 
 	return count;
@@ -110,7 +110,7 @@ void List<T>::Move(const int pos)
 }
 
 template <class T>
-void List<T>::SetValue(const T& value)
+void List<T>::SetValue(const T & value)
 {
 	assert(IsInRange());
 	Current->Next->Item = value;
@@ -124,7 +124,7 @@ T List<T>::GetValue() const
 }
 
 template <class T>
-int List<T>::Find(const T& value)
+int List<T>::Find(const T & value)
 {
 	Move(0);
 

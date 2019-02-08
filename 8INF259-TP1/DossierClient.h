@@ -3,8 +3,6 @@
 
 class DossierClient
 {
-private:
-	Client * tete;
 public:
 	DossierClient();
 	~DossierClient();
@@ -19,5 +17,7 @@ public:
 	int NombreEchange(char * X, char * Y);
 	char* MeilleurClient() const;
 	char* RuePayante() const;
+private:
+	Client * tete;
 };
 
