@@ -1,0 +1,35 @@
++ Client1 rue1 1
++ Client2 rue1 2
++ Client3 rue1 3
++ Client4 rue1 4
++ Client5 rue2 5
++ Client6 rue2 6
++ Client7 rue3 7
++ Client8 rue3 8
+= Client1 Client9 Je vous invite a un party a 18h. Amenez votre quick aux fraises et des amis aussi
+= Client9 Client1 Ok!
+& Client9 Client1
+- Client9
+S VillageC1.txt HistoriqueC1.txt
+- Client1
+- Client2
+- Client3
+- Client4
+- Client5
+- Client6
+- Client7
+- Client8
+S VillageC2.txt HistoriqueC2.txt
+O VillageC1.txt HistoriqueC1.txt
+- Client2
+- Client3
+- Client4
+- Client5
+- Client6
+- Client7
+= Client1 Client8 Bonjour nouvelle amie!
+S VillageC3.txt HistoriqueC3.txt
+O VillageC.txt HistoriqueC.txt
+!
+$
+S VillageC.txt HistoriqueC.txt

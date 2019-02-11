@@ -1,0 +1,30 @@
++ Client1 rue1 1
++ Client2 rue1 2
++ Client3 rue1 3
++ Client4 rue1 4
++ Client5 rue2 5
++ Client6 rue2 6
++ Client7 rue3 7
++ Client8 rue3 8
+= Client1 Client2 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client2 Client3 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client3 Client4 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client4 Client5 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client5 Client6 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client6 Client7 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client7 Client8 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client8 Client1 Parfait, je viens avec des hot-dogs
+!
+$
+- Client1
+- Client2
+- Client3
+- Client4
+- Client5
+- Client6
+- Client7
+- Client8
+!
+$
++ Client1 rue1 1
+S VillageB2.txt HistoriqueB2.txt

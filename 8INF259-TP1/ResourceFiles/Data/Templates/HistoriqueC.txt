@@ -1,0 +1,39 @@
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable1
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable2
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises et vos amis
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable3
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises et vos amis
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable4
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises et vos amis
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable5
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises et vos amis
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable6
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises et vos amis
+&
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable2
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable3
+Vas-tu au party Quick aux fraises ce soir?
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable4
+Vas-tu au party Quick aux fraises ce soir?
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable5
+Vas-tu au party Quick aux fraises ce soir?
+Client6
+Vas-tu au party Quick aux fraises ce soir?
+&
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable3
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable1
+Parfait, je viens avec des hot-dogs
+&
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable4
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable1
+Parfait, je viens avec des chips
+&
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable5
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable2
+Oui
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable1
+Parfait, je viens avec du guacamole
+&
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable6
+ClientAvecUnNomBeaucoupTropLongPourLaTailleDeLaVariable2
+Non

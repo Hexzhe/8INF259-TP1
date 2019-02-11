@@ -1,0 +1,39 @@
+Client1
+Client2
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises!
+Client3
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises!
+Client4
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises!
+Client5
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises!
+Client6
+Vous etes invite a un party chez nous a 18h. Amenez votre quick aux fraises!
+&
+Client2
+Client3
+Vas-tu au party Quick aux fraises ce soir?
+Client4
+Vas-tu au party Quick aux fraises ce soir?
+Client5
+Vas-tu au party Quick aux fraises ce soir?
+Client6
+Vas-tu au party Quick aux fraises ce soir?
+&
+Client3
+Client1
+Parfait, je viens avec des hot-dogs
+&
+Client4
+Client1
+Parfait, je viens avec des chips
+&
+Client5
+Client2
+Oui
+Client1
+Parfait, je viens avec du guacamole
+&
+Client6
+Client2
+Non

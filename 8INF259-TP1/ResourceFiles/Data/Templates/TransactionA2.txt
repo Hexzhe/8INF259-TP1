@@ -1,0 +1,10 @@
+O VillageA1.txt HistoriqueA1.txt
+& Client1 Client6
+- Client6
+& Client1 Client6
++ Client8 rue3 8
+= Client1 Client8 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client8 Client1 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+& Client1 Client8
+!
+S VillageA2.txt HistoriqueA2.txt
