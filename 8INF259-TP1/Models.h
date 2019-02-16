@@ -1,16 +1,17 @@
 #pragma once
 
+#include "LinkedList.h"
+
 struct Message
 {
-	char destinataire[50];
-	char message[80];
-	Message * suivant;
+	string destinataire; //[50]; TODO: The PDF suggest that we must(?) use char[]. I used strings to get something functional ASAP. Add some .c_str() or I dunno
+	string message; //[80];
 };
 
 struct Client
 {
-	char rue[50];
+	string rue; //[50];
 	int numero;
-	char nom[50];
-	Message * listeMessage;
+	string nom; //[50];
+	LinkedList<Message> * messages;
 };

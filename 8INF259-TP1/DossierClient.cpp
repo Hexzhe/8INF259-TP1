@@ -3,90 +3,112 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "List.h"
-#include "Node.h"
+#include "LinkedList.cpp" //TODO: We should be able to include the .h instead, but we get an "unresolved externals" error
 
 using namespace std;
 
 DossierClient::DossierClient()
 {
-
 	//TODO
-
 }
 
 DossierClient::~DossierClient()
 {
-
 	//TODO
-
 }
 
 void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
-	string village;
+	clients = new LinkedList<Client>();
 
-	//historique
-	string sender, receiver, message, next, tmp; //Variables temporaires pour la lecture ?
-
-	// Pour les ajouts dans la listes; seront réutilisés pour chacun
-	Client cunt;
-	Message message;
-
-	List<Client>* client_list = new List<Client>();
-	List<Message>* messag_list = new List<Message>();
-
-	// Ajuster pour utiliser pointeurs chars JASON CHANGE THIS
+	//TODO: use char * params
 	string tmpfichierClient = ("../Resource Files/Data/CLIENT.txt");
 	string tmpfichierHistorique = ("../Resource Files/Data/HISTORIQUE.txt");
 
-	// Input filesteams
+	//Input streams
 	ifstream ifs_client(tmpfichierClient.c_str(), ios::in);
 	ifstream ifs_historique(tmpfichierHistorique.c_str(), ios::in);
 
-	// Open successful
-	if (ifs_client && ifs_historique)
+	//Open validations
+	if (!ifs_client.is_open())
 	{
-		int cpt = 0;
+		cout << "Erreur lors de l'ouverture du fichier client." << endl;
+		return;
+	}
 
-		// while not at end of file
-		while (!ifs_client.eof())
+	if (!ifs_historique.is_open())
+	{
+		cout << "Erreur lors de l'ouverture du fichier historique." << endl;
+		return;
+	}
+
+	//First row = village
+	string village;
+	ifs_client >> village; //TODO: Do something with this?
+
+	//Load clients
+	Client client;
+	while (!ifs_client.eof())
+	{
+		ifs_client >> client.rue;
+		ifs_client >> client.numero;
+		ifs_client >> client.nom;
+
+		clients->Add(client);
+	}
+
+	//Load messages
+	string line;
+	Message * message = new Message();
+	bool skip = false;
+	for (int i = 0; getline(ifs_historique, line); i++)
+	{
+		if (line == "&") //end of record, start new
 		{
-			//Check if start of file
-			if (cpt == 0) {
-				ifs_client >> village;
-			}
-
-			/* if premiere ligne only, village name*/
-			ifs_client >> cunt.rue;
-			ifs_client >> cunt.numero;
-			ifs_client >> cunt.nom;
-
-			client_list->Add(cunt);
+			i = 0;
+			skip = false;
+			continue;
 		}
 
-		while (!ifs_historique.eof())
+		if (skip) continue; //Mean we didn't find a client to associate those messages with. Continue until the next & or EOF
+
+		if (i == 0) //Sender
 		{
-			/* Trouver logique pour l'ajout */
-			ifs_historique >> tmp;
-
-			if (tmp != "&") {
-
-			}
-
-			//messag_list->Add(message) //temp
+			//TODO
+			//We could:
+			//	move this->clients to this specific sender (clients->Move(FindClient(clients, line)))
+			//		If found, we can already set the list position (clients->Move())
+			//		If not found (-1), we can ignore those messages and move to the next record, we can't associate them to anyone anyway. Set skip to true
+			continue;
 		}
 
-		// Fermer
-		ifs_client.close();
-		ifs_historique.close();
-	}
-	else //open not successful
-	{
-		cout << "NOPE";
-	}
-	   
+		if (i % 2 != 0) //Recipient
+		{
+			message = new Message();
+			message->destinataire = line;
+			continue;
+		}
 
+		//Message
+		message->message = line;
+
+		//TODO: Attach message to its client
+		//	Depending on what we chose to to in (i == 0), we may already be at the right position
+		//	Get the current value and attach the message (.Add())
+	}
+
+	//Close streams
+	ifs_client.close();
+	ifs_historique.close();
+}
+
+int DossierClient::FindClient(LinkedList<Client> * clients, string name)
+{
+	//TODO
+	//Iterate through clients (.MoveNext()) and return the index if we find it (.GetValue())
+	//Similar the the .Find() function of LinkedList, but to search on a specific field of the 
+
+	return -1;
 }
 
 void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)

@@ -1,16 +1,16 @@
 #include "pch.h"
-#include "List.h"
-#include "Node.h"
+#include "LinkedList.h"
+#include "LinkedListNode.h"
 #include <cassert>
 
 template <class T>
-List<T>::List()
+LinkedList<T>::LinkedList()
 {
-	Tail = Head = Current = new Node<T>;
+	Tail = Head = Current = new LinkedListNode<T>;
 }
 
 template <class T>
-void List<T>::Clear()
+void LinkedList<T>::Clear()
 {
 	while (Head->Next != nullptr)
 	{
@@ -23,36 +23,36 @@ void List<T>::Clear()
 }
 
 template <class T>
-List<T>::~List()
+LinkedList<T>::~LinkedList()
 {
 	Clear();
 	delete Head;
 }
 
 template <class T>
-void List<T>::Insert(const T & item)
+void LinkedList<T>::Insert(const T & item)
 {
 	assert(Current != nullptr); //Abort if we aren't in the list
 
-	Current->Next = new Node<T>(item, Current->Next);
+	Current->Next = new LinkedListNode<T>(item, Current->Next);
 
 	if (Tail == Current) //If current was tail, tail is now the new item
 		Tail = Current->Next;
 }
 
 template <class T>
-bool List<T>::IsInRange() const
+bool LinkedList<T>::IsInRange() const
 {
 	return (Current != nullptr) && (Current->Next != nullptr); 
 }
 
 template <class T>
-T List<T>::Remove()
+T LinkedList<T>::Remove()
 {
 	assert(IsInRange());
 
 	T tmp = Current->Next->Item;
-	Node<T> * pTmp = Current->Next;
+	LinkedListNode<T> * pTmp = Current->Next;
 	Current->Next = pTmp->Next;
 
 	if (Tail == pTmp)
@@ -63,13 +63,13 @@ T List<T>::Remove()
 }
 
 template <class T>
-void List<T>::Add(const T & item)
+void LinkedList<T>::Add(const T & item)
 {
-	Tail = Tail->Next = new Node<T>(item, nullptr);
+	Tail = Tail->Next = new LinkedListNode<T>(item, nullptr);
 }
 
 template <class T>
-void List<T>::MovePrevious()
+void LinkedList<T>::MovePrevious()
 {
 	if ((Current == nullptr) || (Current == Head))
 	{
@@ -77,7 +77,7 @@ void List<T>::MovePrevious()
 		return;
 	}
 
-	Node<T> * tmp = Head;
+	LinkedListNode<T> * tmp = Head;
 	while ((tmp != nullptr) && (tmp->Next != Current))
 		tmp = tmp->Next;
 
@@ -85,24 +85,24 @@ void List<T>::MovePrevious()
 }
 
 template <class T>
-void List<T>::MoveNext()
+void LinkedList<T>::MoveNext()
 {
 	if (Current != nullptr)
 		Current = Current->Next;
 }
 
 template <class T>
-int List<T>::Count() const
+int LinkedList<T>::Count() const
 {
 	int count = 0;
-	for (Node<T> * tmp = Head->Next; tmp != nullptr; tmp = tmp->Next)
+	for (LinkedListNode<T> * tmp = Head->Next; tmp != nullptr; tmp = tmp->Next)
 		count++;
 
 	return count;
 }
 
 template <class T>
-void List<T>::Move(const int pos)
+void LinkedList<T>::Move(const int pos)
 {
 	Current = Head;
 	for (int i = 0; (Current != nullptr) && (i < pos); i++)
@@ -110,21 +110,21 @@ void List<T>::Move(const int pos)
 }
 
 template <class T>
-void List<T>::SetValue(const T & value)
+void LinkedList<T>::SetValue(const T & value)
 {
 	assert(IsInRange());
 	Current->Next->Item = value;
 }
 
 template <class T>
-T List<T>::GetValue() const
+T LinkedList<T>::GetValue() const
 {
 	assert(IsInRange());
 	return Current->Next->Item;
 }
 
 template <class T>
-int List<T>::Find(const T & value)
+int LinkedList<T>::Find(const T & value)
 {
 	Move(0);
 

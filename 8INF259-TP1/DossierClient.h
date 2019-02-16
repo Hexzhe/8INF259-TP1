@@ -1,5 +1,6 @@
 #pragma once
 #include "Models.h"
+#include "LinkedList.h"
 
 class DossierClient
 {
@@ -18,6 +19,8 @@ public:
 	char* MeilleurClient() const;
 	char* RuePayante() const;
 private:
-	Client * tete;
+	LinkedList<Client> * clients;
+
+	int FindClient(LinkedList<Client> * clients, string name);
 };
 

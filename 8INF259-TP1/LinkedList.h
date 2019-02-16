@@ -1,12 +1,12 @@
 #pragma once
-#include "Node.h"
+#include "LinkedListNode.h"
 
 template <class T>
-class List
+class LinkedList
 {
 public:
-	List();
-	~List();
+	LinkedList();
+	~LinkedList();
 
 	void Add(const T & item); //Add item at the end of the list. Return the new item's index
 	void Insert(const T & item); //Insert item after the current position. Return the new item's index
@@ -21,8 +21,8 @@ public:
 	int Count() const; //Return items count
 	bool IsInRange() const; //Return true if the current position is out of range
 private:
-	Node<T> * Head;
-	Node<T> * Tail;
-	Node<T> * Current;
+	LinkedListNode<T> * Head;
+	LinkedListNode<T> * Tail;
+	LinkedListNode<T> * Current;
 };
 

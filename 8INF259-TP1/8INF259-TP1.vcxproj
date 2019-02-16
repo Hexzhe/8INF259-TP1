@@ -153,15 +153,15 @@
   <ItemGroup>
     <ClInclude Include="DossierClient.h" />
     <ClInclude Include="Models.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Node.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="8INF259-TP1.cpp" />
     <ClCompile Include="DossierClient.cpp" />
-    <ClCompile Include="List.cpp" />
-    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="LinkedListNode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -175,9 +175,14 @@
   <ItemGroup>
     <Text Include="ResourceFiles\Data\CLIENT.txt" />
     <Text Include="ResourceFiles\Data\HISTORIQUE.txt" />
-    <Text Include="ResourceFiles\Data\Templates\CLIENT.txt" />
-    <Text Include="ResourceFiles\Data\Templates\HISTORIQUE.txt" />
-    <Text Include="ResourceFiles\Data\Templates\TRANSACTION.txt" />
+    <Text Include="ResourceFiles\Data\Templates\HistoriqueA.txt" />
+    <Text Include="ResourceFiles\Data\Templates\HistoriqueC.txt" />
+    <Text Include="ResourceFiles\Data\Templates\TransactionA1.txt" />
+    <Text Include="ResourceFiles\Data\Templates\TransactionA2.txt" />
+    <Text Include="ResourceFiles\Data\Templates\TransactionB.txt" />
+    <Text Include="ResourceFiles\Data\Templates\TransactionC.txt" />
+    <Text Include="ResourceFiles\Data\Templates\VillageA.txt" />
+    <Text Include="ResourceFiles\Data\Templates\VillageC.txt" />
     <Text Include="ResourceFiles\Data\TRANSACTION.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
