@@ -13,5 +13,4 @@ struct Client
 	int numero;
 	char nom[50];
 	Message * listeMessage;
-	Client * suivant;
 };

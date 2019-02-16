@@ -1,0 +1,12 @@
+O VillageA.txt HistoriqueA.txt
+!
++ Client7 rue2 7
+= Client2 Client7 Je vous invite a un party a 18h. Amenez votre quick aux fraises!
+= Client7 Client2 Ok!
+= Client1 Client2 Parfait, je viens avec une amie
+= Client1 Client5 Youpi!!! Guacamol et Quick aux fraises!
+!
+$
+& Client1 Client5
+- Client4
+S VillageA1.txt HistoriqueA1.txt
