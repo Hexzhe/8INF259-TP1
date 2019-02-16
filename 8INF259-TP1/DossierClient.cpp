@@ -93,7 +93,7 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 		message->message = line;
 
 		//TODO: Attach message to its client
-		//	Depending on what we chose to to in (i == 0), we may already be at the right position
+		//	Depending on what we chose to do in (i == 0), we may already be at the right position
 		//	Get the current value and attach the message (.Add())
 	}
 
@@ -106,7 +106,7 @@ int DossierClient::FindClient(LinkedList<Client> * clients, string name)
 {
 	//TODO
 	//Iterate through clients (.MoveNext()) and return the index if we find it (.GetValue())
-	//Similar the the .Find() function of LinkedList, but to search on a specific field of the 
+	//Similar the the .Find() function of LinkedList, but to search on a specific field of the node's value
 
 	return -1;
 }
