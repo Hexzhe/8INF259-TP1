@@ -81,12 +81,12 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 		if (i % 2 != 0) //Recipient
 		{
 			message = new Message();
-			strncpy(message->destinataire, line.c_str(), 50);
+			strncpy_s(message->destinataire, line.c_str(), 50);
 			continue;
 		}
 
 		//Message
-		strncpy(message->message, line.c_str(), 80);
+		strncpy_s(message->message, line.c_str(), 80);
 
 		//TODO: Attach message to its client
 		//	Depending on what we chose to do in (i == 0), we may already be at the right position
