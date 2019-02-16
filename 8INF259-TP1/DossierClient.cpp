@@ -21,13 +21,9 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
 	clients = new LinkedList<Client>();
 
-	//TODO: use char * params
-	string tmpfichierClient = ("../Resource Files/Data/CLIENT.txt");
-	string tmpfichierHistorique = ("../Resource Files/Data/HISTORIQUE.txt");
-
 	//Input streams
-	ifstream ifs_client(tmpfichierClient.c_str(), ios::in);
-	ifstream ifs_historique(tmpfichierHistorique.c_str(), ios::in);
+	ifstream ifs_client(fichierClient, ios::in);
+	ifstream ifs_historique(fichierHistorique, ios::in);
 
 	//Open validations
 	if (!ifs_client.is_open())
@@ -85,12 +81,12 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 		if (i % 2 != 0) //Recipient
 		{
 			message = new Message();
-			message->destinataire = line;
+			strncpy(message->destinataire, line.c_str(), 50);
 			continue;
 		}
 
 		//Message
-		message->message = line;
+		strncpy(message->message, line.c_str(), 80);
 
 		//TODO: Attach message to its client
 		//	Depending on what we chose to do in (i == 0), we may already be at the right position
@@ -102,7 +98,7 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 	ifs_historique.close();
 }
 
-int DossierClient::FindClient(LinkedList<Client> * clients, string name)
+int DossierClient::FindClient(LinkedList<Client> * clients, char * name)
 {
 	//TODO
 	//Iterate through clients (.MoveNext()) and return the index if we find it (.GetValue())
@@ -147,4 +143,9 @@ char * DossierClient::RuePayante() const
 {
 	//TODO
 	return nullptr;
+}
+
+void DossierClient::Debug_DisplayClients()
+{
+
 }

@@ -13,13 +13,20 @@
 #include <iostream>
 #include <fstream>
 #include "DossierClient.h"
+#include "LinkedList.h"
 
 using namespace std;
 
 int main()
 {
-	//TODO
+	DossierClient dossierClient;
+	char pathClient[] = "../Resource Files/Data/CLIENT.txt";
+	char pathHistorique[] = "../Resource Files/Data/HISTORIQUE.txt";
+	dossierClient.Ouvrir(pathClient, pathHistorique);
+
+	dossierClient.Debug_DisplayClients();
 
 	system("pause");
 	return 0;
 }
+

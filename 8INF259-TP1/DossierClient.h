@@ -18,9 +18,11 @@ public:
 	int NombreEchange(char * X, char * Y);
 	char* MeilleurClient() const;
 	char* RuePayante() const;
+
+	void Debug_DisplayClients();
 private:
 	LinkedList<Client> * clients;
 
-	int FindClient(LinkedList<Client> * clients, string name);
+	int FindClient(LinkedList<Client> * clients, char * name);
 };
 
