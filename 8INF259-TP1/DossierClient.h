@@ -23,7 +23,7 @@ public:
 	char* MeilleurClient() const;
 	char* RuePayante() const;
 
-	int FindClient(LinkedList<Client> * clients, std::string name);
+	int FindClient(std::string name);
 
 	void Debug_DisplayClients();
 private:

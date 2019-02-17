@@ -11,11 +11,7 @@ DossierClient::~DossierClient()
 	delete clients;
 }
 
-/*
-O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
-S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTORIQUE"
-*/
-
+///O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
 void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
 	//Input streams
@@ -82,7 +78,7 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 
 		if (i == 0) //Sender
 		{
-			if (FindClient(clients, line) == -1)
+			if (FindClient(line) == -1)
 				skip = true; //Not found, we can ignore those messages and move to the next record, we can't associate them to anyone anyway. (the list position is reset to 0)
 
 			//If the client is found, the list "current" will be on its position.
@@ -110,6 +106,7 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 	delete message, client;
 }
 
+///S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTORIQUE"
 void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)
 {
 	//TODO
@@ -277,7 +274,7 @@ char * DossierClient::RuePayante() const
 	return nullptr;
 }
 
-int DossierClient::FindClient(LinkedList<Client> * clients, std::string name)
+int DossierClient::FindClient(std::string name)
 {
 	clients->Move(0);
 
