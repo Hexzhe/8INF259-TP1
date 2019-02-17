@@ -3,13 +3,18 @@
 
 DossierClient::DossierClient()
 {
-	//TODO
+	//TODO LA LISTE DOIT ÊTRE CRÉÉE ICI' PAS DANS OUVRIR
 }
 
 DossierClient::~DossierClient()
 {
-	//TODO
+	//TODO LA LISTE DOIT ÊTRE DÉTRUITE ICI
 }
+
+/*
+O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
+S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTORIQUE"
+*/
 
 void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
@@ -79,9 +84,9 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 
 		if (i == 0) //Sender
 		{
-			if (FindClient(clients, line) == -1) 
+			if (FindClient(clients, line) == -1)
 				skip = true; //Not found, we can ignore those messages and move to the next record, we can't associate them to anyone anyway. (the list position is reset to 0)
-				
+
 			//If the client is found, the list "current" will be on its position.
 			continue;
 		}
@@ -112,35 +117,164 @@ void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)
 	//TODO
 }
 
+///+ X A N : ajouter un client C habitant à l'adresse A et au numéro N à la liste chaînée.
 void DossierClient::AjouterClient(char * nom, char * rue, int numero)
 {
-	//TODO
+	//Add client to the end of the list 
+
+	// Use the filled list **************
+	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_courant = ptr_head;
+	Client * ptr_precedent;
+
+	// Tant que le suivant est pas null
+	while (ptr_courant->suivant != NULL) {
+
+		// Go to next
+		ptr_precedent = ptr_courant;
+		ptr_courant = ptr_courant->suivant;
+	}
+
+	//Créer le nouveau client à la fin
+	ptr_courant->suivant = new Client;
+	ptr_courant = ptr_courant->suivant;
+
+	ptr_courant->nom = nom;
+	ptr_courant->rue = rue;
+	ptr_courant->numero = numero;
+
 }
 
+/// - X : supprimer un client X de la liste chaînée.
 void DossierClient::SupprimerClient(char * nom)
 {
-	//TODO
+	// Use the filled list **************
+	Client * ptr_head = 0; // USE THE OFFICIAL HEAD
+	Client * ptr_courant = ptr_head;
+	Client * ptr_precedent = ptr_head;
+	int cpt = 0;
+	bool found = false;
+
+	// If first client is the one to delete
+	if (ptr_courant->nom == nom) {
+
+		ptr_head = ptr_courant->suivant; // mettre la tête au deuxième
+
+		//supprimer tous les messages du pointeur courant
+		ptr_courant->messages->Clear;
+
+		delete ptr_courant;
+
+	}
+	else {
+
+		// Boucler pour demander les prochaines clés
+		// keep found in case it was not found
+		while (ptr_courant->suivant != NULL && found == false) {
+
+
+			if (ptr_courant->nom == nom) {
+				found = true;
+			}
+			else {
+				// Go to next
+				ptr_courant = ptr_courant->suivant;
+			}
+		}
+
+		if (!found) {
+			// Client was not found
+			// TODO
+		}
+	}
 }
 
+///= X Y M : ajouter un message M envoyé du client X au client Y.
 void DossierClient::AjouterMessage(char * nomClient, char * nomDestination, char * message)
 {
-	//TODO
+	// Use the filled list **************
+	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_courant = ptr_head;
+	bool found = false;
+
+	// Tant que le suivant est pas null
+	while (ptr_courant->suivant != NULL) {
+
+		// Client trouvé
+		if (ptr_courant->nom == nomClient) {
+
+			found = true;
+			Message newMessage;
+			newMessage.destinataire = nomDestination;
+			newMessage.message = message;
+
+			// Add new message
+			ptr_courant->messages->Add(newMessage);
+		}
+		else {
+			// Go to next
+			ptr_courant = ptr_courant->suivant;
+		}
+
+	}
+
+	if (!found) {
+		// TODO
+		// do something if the client wasn't found
+	}
+
 }
 
+///& X Y : afficher le nombre de messages échanger entre le client X et Y.
 int DossierClient::NombreEchange(char * X, char * Y)
 {
 	//TODO
 	return 0;
 }
 
+///! : Afficher le client qui envoie le plus de messages.
 char * DossierClient::MeilleurClient() const
 {
 	//TODO
 	return nullptr;
 }
 
+///$ : Afficher le nom de la rue la plus payante.
 char * DossierClient::RuePayante() const
 {
+	// Use the filled list **************
+	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_courant = ptr_head;
+	Message msg;
+	int cpt = 0, cptTmp = 0;
+	char * ruePayante;
+	bool found = false;
+
+	struct Rues{
+		char * nomRue;
+		int cptClients;
+		Rues * suivante;
+	};
+	
+	// Tant que le suivant est pas null
+	while (ptr_courant->suivant != NULL) {
+
+		bool fin = false;
+
+		while (fin == false) {
+			//ptr_courant->messages->Head
+			// CONTINUE HERE
+		}
+
+
+	}
+
+	if (!found) {
+		// TODO
+		// do something if the client wasn't found
+	}
+
+
 	//TODO
 	return nullptr;
 }
@@ -185,7 +319,7 @@ void DossierClient::Debug_DisplayClients()
 				clients->GetValue().messages->MoveNext();
 			}
 		}
- 
+
 		std::cout << std::endl;
 
 		clients->MoveNext();
