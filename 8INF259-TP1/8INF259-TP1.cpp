@@ -25,7 +25,7 @@ int main()
 
 	//Input stream
 	std::cout << "Opening...TRANSACTION.txt..." << std::flush;
-	std::ifstream ifs_transaction("Resource Files/Data/TRANSACTION.txt", std::ios::in); //TODO: Ask for transaction file name
+	std::ifstream ifs_transaction("Resource Files/Data/TRANSACTION.txt", std::ios::in);
 
 	//Open validation
 	if (!ifs_transaction.is_open())
@@ -38,19 +38,16 @@ int main()
 
 	//Read row by row
 	std::string line;
-	bool skip;
 	std::cout << "Processing transactions..." << std::endl;
 	while (getline(ifs_transaction, line))
 	{
-		skip = false;
-
 		if (line.length() == 0)
 		{
 			std::cout << "Empty line skipped" << std::endl;
 			continue;
 		}
 
-		std::cout << "Processing \"" << line << "\"..." << std::flush;
+		std::cout << "    Processing \"" << line << "\"..." << std::flush;
 
 		//Split the line on space
 		std::regex regex{ R"([\s]+)" };
@@ -59,30 +56,47 @@ int main()
 
 		switch (transaction[0].c_str()[0])
 		{
+		case '-':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->SupprimerClient(transaction[1].c_str());
+			break;
+		case '+':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str()));
+			break;
+		case '=':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str());
+			break;
+		case '&':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
+			break;
+		case '!':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->MeilleurClient();
+			break;
+		case '$':
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->RuePayante();
+			break;
 		case 'O':
-		{
 			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
 			break;
-		}
-		case '-':
-		case '+':
-		case '=':
-		case '&':
-		case '!':
-		case '$':
 		case 'S':
-		default:
-			std::cout << std::endl << "Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\". Skip." << std::endl;
-			skip = true;
+			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str());
 			break;
+		default:
+			std::cout << std::endl << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\". Skip." << std::endl;
+			continue;
 		}
 
-		if (!skip)
-			std::cout << "Done!" << std::endl;
+		std::cout << "Done!" << std::endl;
 	}
 
 	ifs_transaction.close();
-	std::cout << "End of transaction file." << std::endl;
+	std::cout << "Done!" << std::endl;
 
 	system("pause");
 	delete dossierClient;

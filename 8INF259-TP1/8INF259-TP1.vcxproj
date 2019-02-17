@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DossierClient.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="Models.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

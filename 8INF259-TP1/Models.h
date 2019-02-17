@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "LinkedList.cpp"
+#include "LinkedList.cpp" //Using the .h here cause LNK errors
 
 struct Message
 {

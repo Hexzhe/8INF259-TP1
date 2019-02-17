@@ -39,6 +39,12 @@
     <ClInclude Include="Models.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedListNode.h">
+      <Filter>Header Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Header Files\DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

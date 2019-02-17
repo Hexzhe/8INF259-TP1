@@ -113,13 +113,13 @@ void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHisto
 }
 
 ///S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTORIQUE"
-void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)
+void DossierClient::Sauvegarder(const char * fichierClient, const char * fichierHistorique)
 {
 	//TODO
 }
 
 ///+ X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
-void DossierClient::AjouterClient(char * nom, char * rue, int numero)
+void DossierClient::AjouterClient(const char * nom, const char * rue, const int numero)
 {
 	//Add client to the end of the list 
 
@@ -147,7 +147,7 @@ void DossierClient::AjouterClient(char * nom, char * rue, int numero)
 }
 
 /// - X : supprimer un client X de la liste chaînée.
-void DossierClient::SupprimerClient(char * nom)
+void DossierClient::SupprimerClient(const char * nom)
 {
 	// Use the filled list **************
 	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD
@@ -190,7 +190,7 @@ void DossierClient::SupprimerClient(char * nom)
 }
 
 ///= X Y M : ajouter un message M envoyé du client X au client Y.
-void DossierClient::AjouterMessage(char * nomClient, char * nomDestination, char * message)
+void DossierClient::AjouterMessage(const char * nomClient, const char * nomDestination, const char * message)
 {
 	// Use the filled list **************
 	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
@@ -225,7 +225,7 @@ void DossierClient::AjouterMessage(char * nomClient, char * nomDestination, char
 }
 
 ///& X Y : afficher le nombre de messages échanger entre le client X et Y.
-int DossierClient::NombreEchange(char * X, char * Y)
+int DossierClient::NombreEchange(const char * X, const char * Y)
 {
 	//TODO
 	return 0;

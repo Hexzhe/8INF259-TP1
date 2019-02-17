@@ -1,10 +1,9 @@
 #pragma once
-#include "pch.h"
 #include "Models.h"
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "LinkedList.cpp"
+#include "LinkedList.h"
 
 class DossierClient
 {
@@ -13,13 +12,13 @@ public:
 	~DossierClient();
 
 	void Ouvrir(const char * fichierClient, const char * fichierHistorique);
-	void Sauvegarder(char * fichierClient, char * fichierHistorique); 
+	void Sauvegarder(const char * fichierClient, const char * fichierHistorique);
 
-	void AjouterClient(char * nom, char * rue, int numero);
-	void SupprimerClient(char * nom);
-	void AjouterMessage(char * nomClient, char * nomDestination, char * message);
+	void AjouterClient(const char * nom, const char * rue, const int numero);
+	void SupprimerClient(const char * nom);
+	void AjouterMessage(const char * nomClient, const char * nomDestination, const char * message);
 
-	int NombreEchange(char * X, char * Y);
+	int NombreEchange(const char * X, const char * Y);
 	char* MeilleurClient() const;
 	char* RuePayante() const;
 
