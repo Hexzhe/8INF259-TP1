@@ -41,13 +41,13 @@ int main()
 	std::cout << "Processing transactions..." << std::endl;
 	while (getline(ifs_transaction, line))
 	{
+		std::cout << "    Processing \"" << line << "\"..." << std::endl;
+
 		if (line.length() == 0)
 		{
-			std::cout << "Empty line skipped" << std::endl;
+			std::cout << "        Empty line" << std::endl << "    Skipped" << std::endl;
 			continue;
 		}
-
-		std::cout << "    Processing \"" << line << "\"..." << std::flush;
 
 		//Parse the transaction
 		std::string transaction[4]; //max one instruction + 3 params
@@ -58,42 +58,42 @@ int main()
 		switch (transaction[0].c_str()[0])
 		{
 		case '-':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->SupprimerClient(transaction[1].c_str());
 			break;
 		case '+':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str()));
 			break;
 		case '=':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str());
 			break;
 		case '&':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		case '!':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->MeilleurClient();
 			break;
 		case '$':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->RuePayante();
 			break;
 		case 'O':
 			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		case 'S':
-			std::cout << std::endl << "        Debug: Comment this line to enable this instruction. Skip." << std::endl; continue;
+			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		default:
-			std::cout << std::endl << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\". Skip." << std::endl;
+			std::cout << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\"" << std::endl << "    Skipped" << std::endl;
 			continue;
 		}
 
-		std::cout << "Done!" << std::endl;
+		std::cout << "    Done!" << std::endl;
 	}
 
 	ifs_transaction.close();
