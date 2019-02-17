@@ -14,6 +14,7 @@
 
 #include "pch.h"
 #include "DossierClient.h"
+#include <regex>
 
 int main()
 {
@@ -22,16 +23,66 @@ int main()
 	DossierClient * dossierClient = new DossierClient();
 	std::cout << "Done!" << std::endl;
 
-	//TODO: Open the transaction File, for each line, parse the instruction and do the appropriate call of DossierClient()
+	//Input stream
+	std::cout << "Opening...TRANSACTION.txt..." << std::flush;
+	std::ifstream ifs_transaction("Resource Files/Data/TRANSACTION.txt", std::ios::in); //TODO: Ask for transaction file name
 
-	//DEBUG: Ouvrir()
-	std::cout << "Opening..." << std::flush;
-	char fileClient[] = "CLIENT.txt", fileHistorique[] = "HISTORIQUE.txt";
-	std::cout << fileClient << " & " << fileHistorique << "..." << std::flush;
-	dossierClient->Ouvrir(fileClient, fileHistorique);
+	//Open validation
+	if (!ifs_transaction.is_open())
+	{
+		std::cout << "Erreur lors de l'ouverture du fichier transaction." << std::endl;
+		system("pause");
+		return 1;
+	}
 	std::cout << "Done!" << std::endl;
-	dossierClient->Debug_DisplayClients();
-	//
+
+	//Read row by row
+	std::string line;
+	bool skip;
+	std::cout << "Processing transactions..." << std::endl;
+	while (getline(ifs_transaction, line))
+	{
+		skip = false;
+
+		if (line.length() == 0)
+		{
+			std::cout << "Empty line skipped" << std::endl;
+			continue;
+		}
+
+		std::cout << "Processing \"" << line << "\"..." << std::flush;
+
+		//Split the line on space
+		std::regex regex{ R"([\s]+)" };
+		std::sregex_token_iterator it{ line.begin(), line.end(), regex, -1 };
+		std::vector<std::string> transaction{ it, {} }; //TODO: Use our LinkedList instead of a vector maybe
+
+		switch (transaction[0].c_str()[0])
+		{
+		case 'O':
+		{
+			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
+			break;
+		}
+		case '-':
+		case '+':
+		case '=':
+		case '&':
+		case '!':
+		case '$':
+		case 'S':
+		default:
+			std::cout << std::endl << "Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\". Skip." << std::endl;
+			skip = true;
+			break;
+		}
+
+		if (!skip)
+			std::cout << "Done!" << std::endl;
+	}
+
+	ifs_transaction.close();
+	std::cout << "End of transaction file." << std::endl;
 
 	system("pause");
 	delete dossierClient;

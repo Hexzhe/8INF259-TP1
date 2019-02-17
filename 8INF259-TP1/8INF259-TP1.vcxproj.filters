@@ -63,12 +63,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource Files\Data\CLIENT.txt">
-      <Filter>Resource Files\Data</Filter>
-    </Text>
-    <Text Include="Resource Files\Data\HISTORIQUE.txt">
-      <Filter>Resource Files\Data</Filter>
-    </Text>
     <Text Include="Resource Files\Data\TRANSACTION.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
@@ -95,6 +89,12 @@
     </Text>
     <Text Include="Resource Files\Data\Templates\VillageC.txt">
       <Filter>Resource Files\Data\Templates</Filter>
+    </Text>
+    <Text Include="Resource Files\Data\HistoriqueA.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="Resource Files\Data\VillageA.txt">
+      <Filter>Resource Files\Data</Filter>
     </Text>
   </ItemGroup>
 </Project>

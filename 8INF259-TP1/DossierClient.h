@@ -12,7 +12,7 @@ public:
 	DossierClient();
 	~DossierClient();
 
-	void Ouvrir(char * fichierClient, char * fichierHistorique);
+	void Ouvrir(const char * fichierClient, const char * fichierHistorique);
 	void Sauvegarder(char * fichierClient, char * fichierHistorique); 
 
 	void AjouterClient(char * nom, char * rue, int numero);

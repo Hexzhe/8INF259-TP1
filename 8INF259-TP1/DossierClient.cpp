@@ -12,7 +12,7 @@ DossierClient::~DossierClient()
 }
 
 ///O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
-void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
+void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHistorique)
 {
 	//Paths formating
 	char pathClient[260];

@@ -171,8 +171,7 @@
     <None Include="Resource Files\8INF259_Travail_1.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource Files\Data\CLIENT.txt" />
-    <Text Include="Resource Files\Data\HISTORIQUE.txt" />
+    <Text Include="Resource Files\Data\HistoriqueA.txt" />
     <Text Include="Resource Files\Data\Templates\HistoriqueA.txt" />
     <Text Include="Resource Files\Data\Templates\HistoriqueC.txt" />
     <Text Include="Resource Files\Data\Templates\TransactionA1.txt" />
@@ -182,6 +181,7 @@
     <Text Include="Resource Files\Data\Templates\VillageA.txt" />
     <Text Include="Resource Files\Data\Templates\VillageC.txt" />
     <Text Include="Resource Files\Data\TRANSACTION.txt" />
+    <Text Include="Resource Files\Data\VillageA.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
