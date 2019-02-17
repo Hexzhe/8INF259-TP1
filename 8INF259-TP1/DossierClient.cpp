@@ -118,7 +118,7 @@ void DossierClient::AjouterClient(char * nom, char * rue, int numero)
 	//Add client to the end of the list 
 
 	// Use the filled list **************
-	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
 	Client * ptr_courant = ptr_head;
 	Client * ptr_precedent;
 
@@ -144,7 +144,7 @@ void DossierClient::AjouterClient(char * nom, char * rue, int numero)
 void DossierClient::SupprimerClient(char * nom)
 {
 	// Use the filled list **************
-	Client * ptr_head = 0; // USE THE OFFICIAL HEAD
+	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD
 	Client * ptr_courant = ptr_head;
 	Client * ptr_precedent = ptr_head;
 	int cpt = 0;
@@ -178,8 +178,7 @@ void DossierClient::SupprimerClient(char * nom)
 		}
 
 		if (!found) {
-			// Client was not found
-			// TODO
+			//TODO: Client was not found
 		}
 	}
 }
@@ -188,7 +187,7 @@ void DossierClient::SupprimerClient(char * nom)
 void DossierClient::AjouterMessage(char * nomClient, char * nomDestination, char * message)
 {
 	// Use the filled list **************
-	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
 	Client * ptr_courant = ptr_head;
 	bool found = false;
 
@@ -214,8 +213,7 @@ void DossierClient::AjouterMessage(char * nomClient, char * nomDestination, char
 	}
 
 	if (!found) {
-		// TODO
-		// do something if the client wasn't found
+		//TODO: do something if the client wasn't found
 	}
 
 }
@@ -238,7 +236,7 @@ char * DossierClient::MeilleurClient() const
 char * DossierClient::RuePayante() const
 {
 	// Use the filled list **************
-	Client * ptr_head = 0; // USE THE OFFICIAL HEAD 888888888888888888888888888
+	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
 	Client * ptr_courant = ptr_head;
 	Message msg;
 	int cpt = 0, cptTmp = 0;
@@ -258,15 +256,14 @@ char * DossierClient::RuePayante() const
 
 		while (fin == false) {
 			//ptr_courant->messages->Head
-			// CONTINUE HERE
+			//TODO: CONTINUE HERE
 		}
 
 
 	}
 
 	if (!found) {
-		// TODO
-		// do something if the client wasn't found
+		//TODO: do something if the client wasn't found
 	}
 
 
