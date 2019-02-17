@@ -14,9 +14,14 @@ DossierClient::~DossierClient()
 ///O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
 void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
+	char pathClient[260];
+	sprintf_s(pathClient, "ResourceFiles/Data/%s.txt", fichierClient);
+	char pathHistorique[260];
+	sprintf_s(pathHistorique, "ResourceFiles/Data/%s.txt", fichierHistorique);
+
 	//Input streams
-	std::ifstream ifs_client(fichierClient, std::ios::in);
-	std::ifstream ifs_historique(fichierHistorique, std::ios::in);
+	std::ifstream ifs_client(pathClient, std::ios::in);
+	std::ifstream ifs_historique(pathHistorique, std::ios::in);
 
 	//Open validations
 	if (!ifs_client.is_open())

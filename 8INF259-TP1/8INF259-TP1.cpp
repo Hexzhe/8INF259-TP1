@@ -15,9 +15,8 @@
 int main()
 {
 	DossierClient dossierClient;
-	char pathClient[] = "ResourceFiles/Data/CLIENT.txt";
-	char pathHistorique[] = "ResourceFiles/Data/HISTORIQUE.txt";
-	dossierClient.Ouvrir(pathClient, pathHistorique);
+	char fileClient[] = "CLIENT", fileHistorique[] = "HISTORIQUE";
+	dossierClient.Ouvrir(fileClient, fileHistorique);
 
 	dossierClient.Debug_DisplayClients();
 
