@@ -17,13 +17,24 @@
 
 int main()
 {
-	DossierClient dossierClient;
-	char fileClient[] = "CLIENT.txt", fileHistorique[] = "HISTORIQUE.txt";
-	dossierClient.Ouvrir(fileClient, fileHistorique);
+	//Initialization
+	std::cout << "Initializing..." << std::flush;
+	DossierClient * dossierClient = new DossierClient();
+	std::cout << "Done!" << std::endl;
 
-	dossierClient.Debug_DisplayClients();
+	//TODO: Open the transaction File, for each line, parse the instruction and do the appropriate call of DossierClient()
+
+	//DEBUG: Ouvrir()
+	std::cout << "Opening..." << std::flush;
+	char fileClient[] = "CLIENT.txt", fileHistorique[] = "HISTORIQUE.txt";
+	std::cout << fileClient << " & " << fileHistorique << "..." << std::flush;
+	dossierClient->Ouvrir(fileClient, fileHistorique);
+	std::cout << "Done!" << std::endl;
+	dossierClient->Debug_DisplayClients();
+	//
 
 	system("pause");
+	delete dossierClient;
 	return 0;
 }
 
