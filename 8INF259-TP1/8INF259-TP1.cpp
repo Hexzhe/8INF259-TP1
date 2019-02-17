@@ -14,7 +14,7 @@
 
 #include "pch.h"
 #include "DossierClient.h"
-#include <regex>
+#include <sstream>
 
 int main()
 {
@@ -49,10 +49,11 @@ int main()
 
 		std::cout << "    Processing \"" << line << "\"..." << std::flush;
 
-		//Split the line on space
-		std::regex regex{ R"([\s]+)" };
-		std::sregex_token_iterator it{ line.begin(), line.end(), regex, -1 };
-		std::vector<std::string> transaction{ it, {} }; //TODO: Use our LinkedList instead of a vector maybe
+		//Parse the transaction
+		std::string transaction[4]; //max one instruction + 3 params
+		std::istringstream iss(line);
+		for (int i = 0; iss.good() && i < 4; i++)
+			iss >> transaction[i];
 
 		switch (transaction[0].c_str()[0])
 		{
