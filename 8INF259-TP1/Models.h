@@ -22,6 +22,6 @@ struct Client
 	}
 	~Client()
 	{
-		//delete messages; //Tought that it would be a good idea, but it looks like the destructor is called when we attach the message to the client (around the end of Ouvrir()). Commenting this line may cause memory leak, but at least it work 
+		//delete messages; //Thought that it would be a good idea, but it looks like the destructor is called when we attach the message to the client (around the end of Ouvrir()). Commenting this line may cause memory leak, but at least it work 
 	}
 };

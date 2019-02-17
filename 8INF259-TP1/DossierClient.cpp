@@ -3,12 +3,12 @@
 
 DossierClient::DossierClient()
 {
-	//TODO LA LISTE DOIT  TRE CR……E ICI' PAS DANS OUVRIR
+	clients = new LinkedList<Client>();
 }
 
 DossierClient::~DossierClient()
 {
-	//TODO LA LISTE DOIT  TRE D…TRUITE ICI
+	delete clients;
 }
 
 /*
@@ -18,8 +18,6 @@ S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTO
 
 void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 {
-	clients = new LinkedList<Client>();
-
 	//Input streams
 	std::ifstream ifs_client(fichierClient, std::ios::in);
 	std::ifstream ifs_historique(fichierHistorique, std::ios::in);
@@ -161,7 +159,7 @@ void DossierClient::SupprimerClient(char * nom)
 		ptr_head = ptr_courant->suivant; // mettre la tÍte au deuxiËme
 
 		//supprimer tous les messages du pointeur courant
-		ptr_courant->messages->Clear;
+		ptr_courant->messages->Clear();
 
 		delete ptr_courant;
 
