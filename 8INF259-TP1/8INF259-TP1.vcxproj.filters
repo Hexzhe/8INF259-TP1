@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Data">
-      <UniqueIdentifier>{87b6571e-951b-4c1b-84b2-f6faa1bf72cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\DataStructures">
       <UniqueIdentifier>{1a692ebf-9f47-4285-ab3d-261899622a92}</UniqueIdentifier>
     </Filter>
@@ -25,8 +22,11 @@
     <Filter Include="Source Files\DataStructures\LinkedList">
       <UniqueIdentifier>{1d29d88d-e015-4d81-9884-77313a9b80e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Data\Template">
-      <UniqueIdentifier>{9a1d8cbf-6b82-466c-8f08-848a7c214fd1}</UniqueIdentifier>
+    <Filter Include="Resource Files\Data">
+      <UniqueIdentifier>{8afcca8b-af0a-4d88-b78c-ee7a6a7487bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Data\Templates">
+      <UniqueIdentifier>{052635ad-ad1c-4415-96e0-a653b53ebe4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,43 +58,43 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ResourceFiles\8INF259_Travail_1.pdf">
+    <None Include="Resource Files\8INF259_Travail_1.pdf">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ResourceFiles\Data\CLIENT.txt">
+    <Text Include="Resource Files\Data\CLIENT.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\HISTORIQUE.txt">
+    <Text Include="Resource Files\Data\HISTORIQUE.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\TRANSACTION.txt">
+    <Text Include="Resource Files\Data\TRANSACTION.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\HistoriqueA.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\HistoriqueA.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\HistoriqueC.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\HistoriqueC.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\TransactionA1.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\TransactionA1.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\TransactionA2.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\TransactionA2.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\TransactionB.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\TransactionB.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\TransactionC.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\TransactionC.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\VillageA.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\VillageA.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
-    <Text Include="ResourceFiles\Data\Templates\VillageC.txt">
-      <Filter>Resource Files\Data\Template</Filter>
+    <Text Include="Resource Files\Data\Templates\VillageC.txt">
+      <Filter>Resource Files\Data\Templates</Filter>
     </Text>
   </ItemGroup>
 </Project>

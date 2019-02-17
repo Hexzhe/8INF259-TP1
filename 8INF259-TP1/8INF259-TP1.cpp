@@ -7,6 +7,9 @@
 *                                                                 *
 * Description:  Gestion de messagerie électronique.				  *
 *																  *
+* Instructions: Les fichiers de données (clients, historique et   *
+*               transaction se trouvent dans                      *
+*               8INF259-TP1/8INF259-TP1/Resource Files/Data/      *
 ******************************************************************/
 
 #include "pch.h"
@@ -15,7 +18,7 @@
 int main()
 {
 	DossierClient dossierClient;
-	char fileClient[] = "CLIENT", fileHistorique[] = "HISTORIQUE";
+	char fileClient[] = "CLIENT.txt", fileHistorique[] = "HISTORIQUE.txt";
 	dossierClient.Ouvrir(fileClient, fileHistorique);
 
 	dossierClient.Debug_DisplayClients();
