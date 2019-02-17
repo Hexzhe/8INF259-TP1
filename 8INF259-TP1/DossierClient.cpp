@@ -1,11 +1,5 @@
 #include "pch.h"
 #include "DossierClient.h"
-#include <string>
-#include <fstream>
-#include <iostream>
-#include "LinkedList.cpp" //TODO: We should be able to include the .h instead, but we get an "unresolved externals" error
-
-using namespace std;
 
 DossierClient::DossierClient()
 {
@@ -22,46 +16,61 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 	clients = new LinkedList<Client>();
 
 	//Input streams
-	ifstream ifs_client(fichierClient, ios::in);
-	ifstream ifs_historique(fichierHistorique, ios::in);
+	std::ifstream ifs_client(fichierClient, std::ios::in);
+	std::ifstream ifs_historique(fichierHistorique, std::ios::in);
 
 	//Open validations
 	if (!ifs_client.is_open())
 	{
-		cout << "Erreur lors de l'ouverture du fichier client." << endl;
+		std::cout << "Erreur lors de l'ouverture du fichier client." << std::endl;
 		return;
 	}
 
 	if (!ifs_historique.is_open())
 	{
-		cout << "Erreur lors de l'ouverture du fichier historique." << endl;
+		std::cout << "Erreur lors de l'ouverture du fichier historique." << std::endl;
 		return;
 	}
 
-	//First row = village
-	string village;
-	ifs_client >> village; //TODO: Do something with this?
-
 	//Load clients
-	Client client;
-	while (!ifs_client.eof())
+	std::string line;
+	Client * client = new Client();
+	for (int i = 0; getline(ifs_client, line); i++)
 	{
-		ifs_client >> client.rue;
-		ifs_client >> client.numero;
-		ifs_client >> client.nom;
+		if (i == 0) //Village
+		{
+			//Do something
+			continue;
+		}
 
-		clients->Add(client);
+		if (i == 1) //Rue
+		{
+			client->rue = line;
+			continue;
+		}
+
+		if (i == 2) //Numero
+		{
+			client->numero = atoi(line.c_str());
+			continue;
+		}
+
+		//Nom
+		client->nom = line;
+
+		clients->Add(*client);
+		i = 0; //Will get incremented to 1 right away so we skip the village
+		client = new Client();
 	}
 
 	//Load messages
-	string line;
 	Message * message = new Message();
 	bool skip = false;
 	for (int i = 0; getline(ifs_historique, line); i++)
 	{
 		if (line == "&") //end of record, start new
 		{
-			i = 0;
+			i = -1; //Will get incremented to 0 right away
 			skip = false;
 			continue;
 		}
@@ -70,41 +79,32 @@ void DossierClient::Ouvrir(char * fichierClient, char * fichierHistorique)
 
 		if (i == 0) //Sender
 		{
-			//TODO
-			//We could:
-			//	move this->clients to this specific sender (clients->Move(FindClient(clients, line)))
-			//		If found, we can already set the list position (clients->Move())
-			//		If not found (-1), we can ignore those messages and move to the next record, we can't associate them to anyone anyway. Set skip to true
+			if (FindClient(clients, line) == -1) 
+				skip = true; //Not found, we can ignore those messages and move to the next record, we can't associate them to anyone anyway. (the list position is reset to 0)
+				
+			//If the client is found, the list "current" will be on its position.
 			continue;
 		}
 
 		if (i % 2 != 0) //Recipient
 		{
-			message = new Message();
-			strncpy_s(message->destinataire, line.c_str(), 50);
+			message->destinataire = line;
 			continue;
 		}
 
 		//Message
-		strncpy_s(message->message, line.c_str(), 80);
+		message->message = line;
 
-		//TODO: Attach message to its client
-		//	Depending on what we chose to do in (i == 0), we may already be at the right position
-		//	Get the current value and attach the message (.Add())
+		//Attach message
+		clients->GetValue().messages->Add(*message);
+		message = new Message();
 	}
 
 	//Close streams
 	ifs_client.close();
 	ifs_historique.close();
-}
 
-int DossierClient::FindClient(LinkedList<Client> * clients, char * name)
-{
-	//TODO
-	//Iterate through clients (.MoveNext()) and return the index if we find it (.GetValue())
-	//Similar the the .Find() function of LinkedList, but to search on a specific field of the node's value
-
-	return -1;
+	delete message, client;
 }
 
 void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)
@@ -145,7 +145,49 @@ char * DossierClient::RuePayante() const
 	return nullptr;
 }
 
+int DossierClient::FindClient(LinkedList<Client> * clients, std::string name)
+{
+	clients->Move(0);
+
+	for (int i = 0; clients->IsInRange(); i++)
+	{
+		if (clients->Current->Next->Item.nom == name)
+			return i;
+		else
+			clients->MoveNext();
+	}
+
+	clients->Move(0);
+	return -1;
+}
+
 void DossierClient::Debug_DisplayClients()
 {
+	if (clients->Count() < 1) return;
 
+	clients->Move(0);
+
+	while (clients->IsInRange())
+	{
+		std::cout << "nom: " << clients->GetValue().nom << std::endl;
+		std::cout << "rue: " << clients->GetValue().rue << std::endl;
+		std::cout << "numero: " << clients->GetValue().numero << std::endl;
+
+
+		if (clients->GetValue().messages->Count() > 0)
+		{
+			clients->GetValue().messages->Move(0);
+			while (clients->GetValue().messages->IsInRange())
+			{
+				std::cout << "    destinataire: " << clients->GetValue().messages->GetValue().destinataire << std::endl;
+				std::cout << "    message: " << clients->GetValue().messages->GetValue().message << std::endl;
+
+				clients->GetValue().messages->MoveNext();
+			}
+		}
+ 
+		std::cout << std::endl;
+
+		clients->MoveNext();
+	}
 }

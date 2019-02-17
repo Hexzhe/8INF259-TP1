@@ -1,6 +1,10 @@
 #pragma once
+#include "pch.h"
 #include "Models.h"
-#include "LinkedList.h"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include "LinkedList.cpp"
 
 class DossierClient
 {
@@ -19,10 +23,10 @@ public:
 	char* MeilleurClient() const;
 	char* RuePayante() const;
 
+	int FindClient(LinkedList<Client> * clients, std::string name);
+
 	void Debug_DisplayClients();
 private:
 	LinkedList<Client> * clients;
-
-	int FindClient(LinkedList<Client> * clients, char * name);
 };
 

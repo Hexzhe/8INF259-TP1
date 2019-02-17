@@ -10,18 +10,13 @@
 ******************************************************************/
 
 #include "pch.h"
-#include <iostream>
-#include <fstream>
 #include "DossierClient.h"
-#include "LinkedList.h"
-
-using namespace std;
 
 int main()
 {
 	DossierClient dossierClient;
-	char pathClient[] = "../Resource Files/Data/CLIENT.txt";
-	char pathHistorique[] = "../Resource Files/Data/HISTORIQUE.txt";
+	char pathClient[] = "ResourceFiles/Data/CLIENT.txt";
+	char pathHistorique[] = "ResourceFiles/Data/HISTORIQUE.txt";
 	dossierClient.Ouvrir(pathClient, pathHistorique);
 
 	dossierClient.Debug_DisplayClients();
