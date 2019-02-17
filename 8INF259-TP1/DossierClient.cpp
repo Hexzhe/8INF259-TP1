@@ -112,7 +112,7 @@ void DossierClient::Sauvegarder(char * fichierClient, char * fichierHistorique)
 	//TODO
 }
 
-///+ X A N : ajouter un client C habitant à l'adresse A et au numéro N à la liste chaînée.
+///+ X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
 void DossierClient::AjouterClient(char * nom, char * rue, int numero)
 {
 	//Add client to the end of the list 
