@@ -175,8 +175,9 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 		clients->MoveNext(); //Peak next value
 		if (clients->IsInRange()) //Only add a "&" if we aren't at the last index
 		{
-			ofs_historique << std::endl << "&" << std::endl;
 			ofs_client << std::endl;
+			if (clients->GetValue().messages->Count() > 0) //Do not add anything to historique file if the client didn't have messages
+				ofs_historique << std::endl << "&" << std::endl;
 		}
 		clients->MovePrevious(); //Move back
 	}
