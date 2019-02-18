@@ -27,5 +27,6 @@ public:
 	void Debug_DisplayClients();
 private:
 	LinkedList<Client> * clients;
+	std::string village;
 };
 

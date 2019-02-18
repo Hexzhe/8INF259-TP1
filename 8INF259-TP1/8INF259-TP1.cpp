@@ -85,7 +85,6 @@ int main()
 			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		case 'S':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
 			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		default:

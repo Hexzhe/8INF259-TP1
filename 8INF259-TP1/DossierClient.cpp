@@ -44,7 +44,7 @@ void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHisto
 	{
 		if (i == 0) //Village
 		{
-			//Do something
+			village = line;
 			continue;
 		}
 
@@ -115,7 +115,77 @@ void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHisto
 ///S CLIENT HITORIQUE: enregistre les fichiers client "CLIENT" et historique "HISTORIQUE"
 void DossierClient::Sauvegarder(const char * fichierClient, const char * fichierHistorique)
 {
-	//TODO
+	//Paths formating
+	char pathClient[260];
+	sprintf_s(pathClient, "Resource Files/Data/%s", fichierClient);
+	char pathHistorique[260];
+	sprintf_s(pathHistorique, "Resource Files/Data/%s", fichierHistorique);
+
+	//Input streams
+	std::ofstream ofs_client(pathClient, std::ios::trunc);
+	std::ofstream ofs_historique(pathHistorique, std::ios::trunc);
+
+	//Open validations
+	if (!ofs_client.is_open())
+	{
+		std::cout << "Erreur lors de l'ouverture du fichier client." << std::endl;
+		return;
+	}
+
+	if (!ofs_historique.is_open())
+	{
+		std::cout << "Erreur lors de l'ouverture du fichier historique." << std::endl;
+		return;
+	}
+
+	//First row = village
+	ofs_client << village << std::endl;
+
+	if (clients->Count() < 1) return;
+
+	for (clients->Move(0); clients->IsInRange(); clients->MoveNext()) //Iterate through clients
+	{
+		ofs_client << clients->GetValue().rue << std::endl;
+		ofs_client << clients->GetValue().numero << std::endl;
+		ofs_client << clients->GetValue().nom << std::flush;
+
+		if (clients->GetValue().messages->Count() > 0)
+		{
+			clients->GetValue().messages->Move(0);
+
+			//First row = sender name
+			ofs_historique << clients->GetValue().nom << std::endl;
+
+			for (clients->GetValue().messages->Move(0); clients->GetValue().messages->IsInRange(); clients->GetValue().messages->MoveNext()) //Iterate through clients' messages
+			{
+				ofs_historique << clients->GetValue().messages->GetValue().destinataire << std::endl;
+				ofs_historique << clients->GetValue().messages->GetValue().message << std::flush;
+
+				//Fix std::endl at the end of the file
+				clients->GetValue().messages->MoveNext(); //Peak next value
+				if (clients->GetValue().messages->IsInRange()) //Only add a "std::endl" if we aren't at the last index
+					ofs_historique << std::endl;
+				clients->GetValue().messages->MovePrevious(); //Move back
+			}
+
+			clients->GetValue().messages->Move(0);
+		}
+
+		//Fix std::endl at the end of the files
+		clients->MoveNext(); //Peak next value
+		if (clients->IsInRange()) //Only add a "&" if we aren't at the last index
+		{
+			ofs_historique << std::endl << "&" << std::endl;
+			ofs_client << std::endl;
+		}
+		clients->MovePrevious(); //Move back
+	}
+
+	clients->Move(0);
+
+	//Close streams
+	ofs_client.close();
+	ofs_historique.close();
 }
 
 ///+ X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
@@ -295,6 +365,7 @@ int DossierClient::FindClient(std::string name)
 
 void DossierClient::Debug_DisplayClients()
 {
+	//Delete this before prod
 	if (clients->Count() < 1) return;
 
 	clients->Move(0);
