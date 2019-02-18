@@ -49,6 +49,7 @@ int main()
 			continue;
 		}
 
+		//TODO: Looks liks messages can have space in them... We'll have to parse it manually to split the first 3 spaces then consider the rest of the line as the 3rd argument including spaces
 		//Parse the transaction
 		std::string transaction[4]; //max one instruction + 3 params
 		std::istringstream iss(line);
@@ -69,19 +70,19 @@ int main()
 		case '&':
 		{
 			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
-			std::cout << "        result: " << result;
+			std::cout << "        result: " << result << std::endl;
 			break;
 		}
 		case '!':
 		{
-			const char * result = dossierClient->MeilleurClient();
-			std::cout << "        result: " << result;
+			std::string result = dossierClient->MeilleurClient();
+			std::cout << "        result: " << result << std::endl;
 			break;
 		}
 		case '$':
 		{
-			const char * result = dossierClient->RuePayante();
-			std::cout << "        result: " << result;
+			std::string result = dossierClient->RuePayante();
+			std::cout << "        result: " << result << std::endl;
 			break;
 		}
 		case 'O':

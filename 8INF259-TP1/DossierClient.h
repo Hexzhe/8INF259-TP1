@@ -19,8 +19,8 @@ public:
 	void AjouterMessage(const char * nomClient, const char * nomDestination, const char * message);
 
 	int NombreEchange(const char * X, const char * Y);
-	const char* MeilleurClient() const;
-	const char* RuePayante() const;
+	std::string MeilleurClient();
+	std::string RuePayante();
 
 	int FindClient(std::string name);
 	int FindMax(LinkedList<int> * values);

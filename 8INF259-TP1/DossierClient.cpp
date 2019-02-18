@@ -302,7 +302,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 }
 
 ///! : Afficher le client qui envoie le plus de messages.
-const char * DossierClient::MeilleurClient() const
+std::string DossierClient::MeilleurClient()
 {
 	int count, max = 0;
 	std::string best = "None";
@@ -325,11 +325,11 @@ const char * DossierClient::MeilleurClient() const
 	}
 	clients->Move(0);
 
-	return best.c_str();
+	return best;
 }
 
 ///$ : Afficher le nom de la rue la plus payante (la rue qui envoie le plus de messages)
-const char * DossierClient::RuePayante() const
+std::string DossierClient::RuePayante()
 {
 	std::string best = "None";
 	LinkedList<std::string> * streets = new LinkedList<std::string>();
@@ -346,13 +346,13 @@ const char * DossierClient::RuePayante() const
 		{
 			//We already got count for that street
 			counts->Move(i);
-			//TODO: Increment counts.current
+			counts->SetValue(counts->GetValue() + 1);
 		}
 		else
 		{
 			//First time we got that street
 			streets->Add(clients->GetValue().rue);
-			counts->Add(0);
+			counts->Add(1);
 		}
 
 		clients->MoveNext();
@@ -362,17 +362,19 @@ const char * DossierClient::RuePayante() const
 	if (counts->Count() == 0)
 		return best.c_str();
 
-	streets->Move(FindMax(counts)); //??
+	streets->Move(FindMax(counts));
 	best = streets->GetValue();
 
 	delete counts, streets;
-	return best.c_str();
+	return best;
 }
 
 int DossierClient::FindClient(std::string name)
 {
-	clients->Move(0);
+	if (clients->Count() == 0)
+		return -1;
 
+	clients->Move(0);
 	for (int i = 0; clients->IsInRange(); i++)
 	{
 		if (clients->Current->Next->Item.nom == name)
@@ -380,13 +382,29 @@ int DossierClient::FindClient(std::string name)
 		else
 			clients->MoveNext();
 	}
-
 	clients->Move(0);
+
 	return -1;
 }
 
 int DossierClient::FindMax(LinkedList<int> * values)
 {
-	//TODO: Return the index of the highest value, -1 if none
-	return 0;
+	if (values->Count() == 0)
+		return -1;
+
+	int index, max = 0;
+
+	values->Move(0);
+	for (int i = 0; values->IsInRange(); i++)
+	{
+		if (values->GetValue() > max)
+		{
+			max = values->GetValue();
+			index = i;
+		}
+
+		values->MoveNext();
+	}
+
+	return index;
 }
