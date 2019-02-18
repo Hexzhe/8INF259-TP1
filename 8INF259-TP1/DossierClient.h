@@ -23,6 +23,7 @@ public:
 	const char* RuePayante() const;
 
 	int FindClient(std::string name);
+	int FindMax(LinkedList<int> * values);
 private:
 	LinkedList<Client> * clients;
 	std::string village;

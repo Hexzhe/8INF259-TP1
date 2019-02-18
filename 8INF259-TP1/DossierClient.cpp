@@ -328,37 +328,45 @@ const char * DossierClient::MeilleurClient() const
 	return best.c_str();
 }
 
-///$ : Afficher le nom de la rue la plus payante.
+///$ : Afficher le nom de la rue la plus payante (la rue qui envoie le plus de messages)
 const char * DossierClient::RuePayante() const
 {
-	int total = 0, max = 0;
-	//char * bestStreet;
-	std::string bestStreet;
+	std::string best = "None";
+	LinkedList<std::string> * streets = new LinkedList<std::string>();
+	LinkedList<int> * counts = new LinkedList<int>();
 
-	//Loop through clients
-	while (clients->IsInRange()) {
+	if (clients->Count() == 0)
+		return best.c_str();
 
-		//Loop through messages
-		while (clients->GetValue().messages->IsInRange()) {
-			total++;
-			clients->GetValue().messages->MoveNext();
+	clients->Move(0);
+	while (clients->IsInRange())
+	{
+		int i = streets->Find(clients->GetValue().rue);
+		if (i > -1)
+		{
+			//We already got count for that street
+			counts->Move(i);
+			//TODO: Increment counts.current
+		}
+		else
+		{
+			//First time we got that street
+			streets->Add(clients->GetValue().rue);
+			counts->Add(0);
 		}
 
-		if (total > max) {
-			max = total;
-			bestStreet = clients->GetValue().rue;
-		}
-		total = 0;
 		clients->MoveNext();
 	}
+	clients->Move(0);
 
-	// Si aucun message n'a été envoyé
-	if (max == 0) {
-		std::cout << "Aucun message n'a ete envoye.";
+	if (counts->Count() == 0)
+		return best.c_str();
 
-	}
+	streets->Move(FindMax(counts)); //??
+	best = streets->GetValue();
 
-	return nullptr;
+	delete counts, streets;
+	return best.c_str();
 }
 
 int DossierClient::FindClient(std::string name)
@@ -375,4 +383,10 @@ int DossierClient::FindClient(std::string name)
 
 	clients->Move(0);
 	return -1;
+}
+
+int DossierClient::FindMax(LinkedList<int> * values)
+{
+	//TODO: Return the index of the highest value, -1 if none
+	return 0;
 }
