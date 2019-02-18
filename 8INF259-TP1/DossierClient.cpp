@@ -256,43 +256,49 @@ void DossierClient::AjouterMessage(const char * nomClient, const char * nomDesti
 ///& X Y : afficher le nombre de messages échangés entre le client X et Y.
 int DossierClient::NombreEchange(const char * X, const char * Y)
 {
-	int cptMsg = 0;
-	int indexClientX = 0, indexClientY = 0;
+	int count = 0;
 
-	indexClientX = FindClient(X);
-	indexClientY = FindClient(X);
+	//X -> Y
+	if (FindClient(X) < 0)
+	{
+		std::cout << "        Client not found" << std::endl;
+		return;
+	}
+	
+	if (clients->GetValue().messages->Count() > 0)
+	{
+		clients->GetValue().messages->Move(0);
+		while (clients->GetValue().messages->IsInRange())
+		{
+			if (clients->GetValue().messages->GetValue().destinataire == Y)
+				count++;
 
-	/***************
-	* Client X à Y *
-	***************/
-	clients->Move(indexClientX);
-
-	//While not at the end
-	while (clients->GetValue().messages->IsInRange()) {
-
-		// If a message to Y was found
-		if (clients->GetValue().messages->GetValue().destinataire == Y)
-			cptMsg++;
-
-		clients->GetValue().messages->MoveNext();
+			clients->GetValue().messages->MoveNext();
+		}
+		clients->GetValue().messages->Move(0);
 	}
 
-	/***************
-	* Client Y à X *
-	***************/
-	clients->Move(indexClientY);
+	//Y -> X
+	if (FindClient(Y) < 0)
+	{
+		std::cout << "        Client not found" << std::endl;
+		return;
+	}
+	
+	if (clients->GetValue().messages->Count() > 0)
+	{
+		clients->GetValue().messages->Move(0);
+		while (clients->GetValue().messages->IsInRange())
+		{
+			if (clients->GetValue().messages->GetValue().destinataire == X)
+				count++;
 
-	//While not at the end
-	while (clients->GetValue().messages->IsInRange()) {
-
-		// If a message to X was found
-		if (clients->GetValue().messages->GetValue().destinataire == X)
-			cptMsg++;
-
-		clients->GetValue().messages->MoveNext();
+			clients->GetValue().messages->MoveNext();
+		}
+		clients->GetValue().messages->Move(0);
 	}
 
-	return cptMsg;
+	return count;
 }
 
 ///! : Afficher le client qui envoie le plus de messages.

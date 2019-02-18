@@ -58,21 +58,32 @@ int main()
 		switch (transaction[0].c_str()[0])
 		{
 		case '-':
-			dossierClient->SupprimerClient(transaction[1].c_str()); break;
+			dossierClient->SupprimerClient(transaction[1].c_str()); 
+			break;
 		case '+':
-			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str())); break;
+			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str())); 
+			break;
 		case '=':
-			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str()); break;
+			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str()); 
+			break;
 		case '&':
-			dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str()); break;
+			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str()); 
+			std::cout << "        result: " << result;
+			break;
 		case '!':
-			dossierClient->MeilleurClient(); break;
+			char * result = dossierClient->MeilleurClient();
+			std::cout << "        result: " << result;
+			break;
 		case '$':
-			dossierClient->RuePayante(); break;
+			char * result = dossierClient->RuePayante(); 
+			std::cout << "        result: " << result;
+			break;
 		case 'O':
-			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str()); break;
+			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str()); 
+			break;
 		case 'S':
-			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str()); break;
+			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str()); 
+			break;
 		default:
 			std::cout << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\"" << std::endl << "    Skipped" << std::endl;
 			continue;
