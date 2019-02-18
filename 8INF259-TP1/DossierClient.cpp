@@ -217,12 +217,7 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 /// + X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
 void DossierClient::AjouterClient(const char * nom, const char * rue, const int numero)
 {
-	// Tant que le suivant est pas null, aller au suivant
-	while (clients->IsInRange()) {
-		clients->MoveNext();
-	}
-
-	Client newClient;// = new Client();
+	Client newClient;
 	newClient.nom = nom;
 	newClient.rue = rue;
 	newClient.numero = numero;
@@ -233,22 +228,13 @@ void DossierClient::AjouterClient(const char * nom, const char * rue, const int 
 /// - X : supprimer un client X de la liste chaînée.
 void DossierClient::SupprimerClient(const char * nom)
 {
-	int index;
-
-	//Retourne l'index si trouvé
-	index = FindClient(nom);
-
-	// Trouvé
-	if (index >= 0) {
-
-		clients->Move(index);
-		clients->Remove();
-
-	}
-	else {
-		std::cout << "Client non trouvé." << std::flush;
+	if (FindClient(nom) < 0)
+	{
+		std::cout << "        Client not found" << std::endl;
+		return;
 	}
 
+	clients->Remove();
 }
 
 ///= X Y M : ajouter un message M envoyé du client X au client Y.
@@ -257,23 +243,14 @@ void DossierClient::AjouterMessage(const char * nomClient, const char * nomDesti
 	Message newMessage;
 	newMessage.destinataire = nomDestination;
 	newMessage.message = message;
-	bool found = false;
-	int index, messagesCount=0;
 
-	// Find client
-	index = FindClient(nomClient);
-	
-	// Client found
-	if (index >= 0) {
+	if (FindClient(nomClient) < 0)
+	{
+		std::cout << "        Client not found" << std::endl;
+		return;
+	}
 
-		clients->Move(index); // 8888888888888 does it work ?????
-		messagesCount = clients->GetValue().messages->Count();
-		clients->GetValue().messages->Move(messagesCount-1);
-		clients->GetValue().messages->Add(newMessage);
-	}
-	else {
-		std::cout << "Client non trouvé." << std::flush;
-	}
+	clients->GetValue().messages->Add(newMessage);
 }
 
 ///& X Y : afficher le nombre de messages échangés entre le client X et Y.
@@ -400,36 +377,4 @@ int DossierClient::FindClient(std::string name)
 
 	clients->Move(0);
 	return -1;
-}
-
-void DossierClient::Debug_DisplayClients()
-{
-	//Delete this before prod
-	if (clients->Count() < 1) return;
-
-	clients->Move(0);
-
-	while (clients->IsInRange())
-	{
-		std::cout << "nom: " << clients->GetValue().nom << std::endl;
-		std::cout << "rue: " << clients->GetValue().rue << std::endl;
-		std::cout << "numero: " << clients->GetValue().numero << std::endl;
-
-
-		if (clients->GetValue().messages->Count() > 0)
-		{
-			clients->GetValue().messages->Move(0);
-			while (clients->GetValue().messages->IsInRange())
-			{
-				std::cout << "    destinataire: " << clients->GetValue().messages->GetValue().destinataire << std::endl;
-				std::cout << "    message: " << clients->GetValue().messages->GetValue().message << std::endl;
-
-				clients->GetValue().messages->MoveNext();
-			}
-		}
-
-		std::cout << std::endl;
-
-		clients->MoveNext();
-	}
 }
