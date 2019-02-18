@@ -58,35 +58,21 @@ int main()
 		switch (transaction[0].c_str()[0])
 		{
 		case '-':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->SupprimerClient(transaction[1].c_str());
-			break;
+			dossierClient->SupprimerClient(transaction[1].c_str()); break;
 		case '+':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str()));
-			break;
+			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str())); break;
 		case '=':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str());
-			break;
+			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str()); break;
 		case '&':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
-			break;
+			dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str()); break;
 		case '!':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->MeilleurClient();
-			break;
+			dossierClient->MeilleurClient(); break;
 		case '$':
-			std::cout << "        Debug: Comment this line to enable this instruction" << std::endl << "    Skipped" << std::endl; continue;
-			dossierClient->RuePayante();
-			break;
+			dossierClient->RuePayante(); break;
 		case 'O':
-			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
-			break;
+			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str()); break;
 		case 'S':
-			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str());
-			break;
+			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str()); break;
 		default:
 			std::cout << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\"" << std::endl << "    Skipped" << std::endl;
 			continue;

@@ -14,20 +14,22 @@
 #include "pch.h"
 #include "DossierClient.h"
 
+/// Constructeur
 DossierClient::DossierClient()
 {
 	clients = new LinkedList<Client>();
 }
 
+/// Destructeur
 DossierClient::~DossierClient()
 {
 	delete clients;
 }
 
-///O CLIENT HISTORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
+/// O CLIENT HISTORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
 void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHistorique)
 {
-	//Paths formating
+	//Paths formatting
 	char pathClient[260];
 	sprintf_s(pathClient, "Resource Files/Data/%s", fichierClient);
 	char pathHistorique[260];
@@ -55,29 +57,29 @@ void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHisto
 	Client * client = new Client();
 	for (int i = 0; getline(ifs_client, line); i++)
 	{
-		if (i == 0) //Village
+		if (i == 0) // Village
 		{
 			village = line;
 			continue;
 		}
 
-		if (i == 1) //Rue
+		if (i == 1) // Rue
 		{
 			client->rue = line;
 			continue;
 		}
 
-		if (i == 2) //Numero
+		if (i == 2) // Numero
 		{
 			client->numero = atoi(line.c_str());
 			continue;
 		}
 
-		//Nom
+		// Nom
 		client->nom = line;
 
 		clients->Add(*client);
-		i = 0; //Will get incremented to 1 right away so we skip the village
+		i = 0; // Will get incremented to 1 right away so we skip the village
 		client = new Client();
 	}
 
@@ -86,32 +88,39 @@ void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHisto
 	bool skip = false;
 	for (int i = 0; getline(ifs_historique, line); i++)
 	{
-		if (line == "&") //end of record, start new
+		if (line == "&") // End of record, start new
 		{
-			i = -1; //Will get incremented to 0 right away
+			i = -1; // Will get incremented to 0 right away
 			skip = false;
 			continue;
 		}
 
-		if (skip) continue; //Mean we didn't find a client to associate those messages with. Continue until the next & or EOF
+		if (skip) continue; // Means we didn't find a client to associate those messages with. Continue until the next & or EOF
 
-		if (i == 0) //Sender
+		if (i == 0) // Sender
 		{
 			if (FindClient(line) == -1)
-				skip = true; //Not found, we can ignore those messages and move to the next record, we can't associate them to anyone anyway. (the list position is reset to 0)
+				skip = true; // Not found, we can ignore those messages and move to the next record, we can't associate them to anyone anyway. (the list position is reset to 0)
 
-			//If the client is found, the list "current" will be on its position.
+			// If the client is found, the list "current" will be on its position.
 			continue;
 		}
 
-		if (i % 2 != 0) //Recipient
+		if (i % 2 != 0) // Recipient
 		{
 			message->destinataire = line;
 			continue;
 		}
 
-		//Message
-		message->message = line;
+		// Check if message is longer than 80
+		if (message->message.length() < 80) {
+			message->message = line;
+		}
+		else {
+			// If longer than 80 chars, truncate
+			std::cout << "Le message est trop long pour pouvoir etre enregistre. Il sera tronque.";
+			message->message.resize(80);
+		}
 
 		//Attach message
 		clients->GetValue().messages->Add(*message);
@@ -156,7 +165,8 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 
 	if (clients->Count() < 1) return;
 
-	for (clients->Move(0); clients->IsInRange(); clients->MoveNext()) //Iterate through clients
+	//Iterate through clients
+	for (clients->Move(0); clients->IsInRange(); clients->MoveNext())
 	{
 		ofs_client << clients->GetValue().rue << std::endl;
 		ofs_client << clients->GetValue().numero << std::endl;
@@ -169,7 +179,8 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 			//First row = sender name
 			ofs_historique << clients->GetValue().nom << std::endl;
 
-			for (clients->GetValue().messages->Move(0); clients->GetValue().messages->IsInRange(); clients->GetValue().messages->MoveNext()) //Iterate through clients' messages
+			//Iterate through clients' messages
+			for (clients->GetValue().messages->Move(0); clients->GetValue().messages->IsInRange(); clients->GetValue().messages->MoveNext())
 			{
 				ofs_historique << clients->GetValue().messages->GetValue().destinataire << std::endl;
 				ofs_historique << clients->GetValue().messages->GetValue().message << std::flush;
@@ -178,6 +189,7 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 				clients->GetValue().messages->MoveNext(); //Peak next value
 				if (clients->GetValue().messages->IsInRange()) //Only add a "std::endl" if we aren't at the last index
 					ofs_historique << std::endl;
+
 				clients->GetValue().messages->MovePrevious(); //Move back
 			}
 
@@ -242,26 +254,26 @@ void DossierClient::SupprimerClient(const char * nom)
 ///= X Y M : ajouter un message M envoyé du client X au client Y.
 void DossierClient::AjouterMessage(const char * nomClient, const char * nomDestination, const char * message)
 {
-
 	Message newMessage;
 	newMessage.destinataire = nomDestination;
 	newMessage.message = message;
 	bool found = false;
-	int index;
+	int index, messagesCount=0;
 
 	// Find client
 	index = FindClient(nomClient);
-
+	
 	// Client found
 	if (index >= 0) {
-		// 8888888888888 does it work ?????
-		clients->GetValue().messages->Move.Tail;
+
+		clients->Move(index); // 8888888888888 does it work ?????
+		messagesCount = clients->GetValue().messages->Count();
+		clients->GetValue().messages->Move(messagesCount-1);
 		clients->GetValue().messages->Add(newMessage);
 	}
 	else {
 		std::cout << "Client non trouvé." << std::flush;
 	}
-
 }
 
 ///& X Y : afficher le nombre de messages échangés entre le client X et Y.
@@ -285,7 +297,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 		if (clients->GetValue().messages->GetValue().destinataire == Y)
 			cptMsg++;
 
-		clients->GetValue().messages->MoveNext;
+		clients->GetValue().messages->MoveNext();
 	}
 
 	/***************
@@ -300,7 +312,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 		if (clients->GetValue().messages->GetValue().destinataire == X)
 			cptMsg++;
 
-		clients->GetValue().messages->MoveNext;
+		clients->GetValue().messages->MoveNext();
 	}
 
 	return cptMsg;
@@ -335,7 +347,7 @@ char * DossierClient::MeilleurClient() const
 		std::cout << "Aucun message n'a ete envoye dans le village.";
 	}
 	else {
-		return bestClient;
+		//return bestClient; //888888888888888888888888888888888888888888
 	}
 	//TODO
 	return nullptr;
