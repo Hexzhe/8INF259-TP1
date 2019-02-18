@@ -67,17 +67,23 @@ int main()
 			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str()); 
 			break;
 		case '&':
-			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str()); 
+		{
+			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
 			std::cout << "        result: " << result;
 			break;
+		}
 		case '!':
-			char * result = dossierClient->MeilleurClient();
+		{
+			const char * result = dossierClient->MeilleurClient();
 			std::cout << "        result: " << result;
 			break;
+		}
 		case '$':
-			char * result = dossierClient->RuePayante(); 
+		{
+			const char * result = dossierClient->RuePayante();
 			std::cout << "        result: " << result;
 			break;
+		}
 		case 'O':
 			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str()); 
 			break;

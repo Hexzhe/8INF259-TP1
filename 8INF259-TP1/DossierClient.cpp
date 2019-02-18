@@ -262,7 +262,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	if (FindClient(X) < 0)
 	{
 		std::cout << "        Client 1 not found" << std::endl;
-		return;
+		return -1;
 	}
 	
 	if (clients->GetValue().messages->Count() > 0)
@@ -282,7 +282,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	if (FindClient(Y) < 0)
 	{
 		std::cout << "        Client 2 not found" << std::endl;
-		return;
+		return -1;
 	}
 	
 	if (clients->GetValue().messages->Count() > 0)
@@ -302,42 +302,34 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 }
 
 ///! : Afficher le client qui envoie le plus de messages.
-char * DossierClient::MeilleurClient() const
+const char * DossierClient::MeilleurClient() const
 {
-	int cptMsg, max = 0;
-	std::string bestClient;
+	int count, max = 0;
+	std::string best = "None";
 
-	// Loop through clients
-	while (clients->IsInRange()) {
-		cptMsg = 0;
+	if (clients->Count() == 0)
+		return best.c_str();
 
-		//Loop through client's messages
-		while (clients->GetValue().messages->IsInRange()) {
-			cptMsg++;
-			clients->GetValue().messages->MoveNext();
-		}
+	clients->Move(0);
+	while (clients->IsInRange())
+	{
+		count = clients->GetValue().messages->Count();
 
-		// If current cpt > than the current max
-		if (cptMsg > max) {
-			max = cptMsg;
-			bestClient = clients->Current->Item.nom;
+		if (count > max)
+		{
+			max = count;
+			best = clients->GetValue().nom;
 		}
 
 		clients->MoveNext();
 	}
+	clients->Move(0);
 
-	if (max = 0) {
-		std::cout << "Aucun message n'a ete envoye dans le village.";
-	}
-	else {
-		//return bestClient; //888888888888888888888888888888888888888888
-	}
-	//TODO
-	return nullptr;
+	return best.c_str();
 }
 
 ///$ : Afficher le nom de la rue la plus payante.
-char * DossierClient::RuePayante() const
+const char * DossierClient::RuePayante() const
 {
 	int total = 0, max = 0;
 	//char * bestStreet;

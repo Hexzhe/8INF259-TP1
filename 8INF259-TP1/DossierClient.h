@@ -19,12 +19,10 @@ public:
 	void AjouterMessage(const char * nomClient, const char * nomDestination, const char * message);
 
 	int NombreEchange(const char * X, const char * Y);
-	char* MeilleurClient() const;
-	char* RuePayante() const;
+	const char* MeilleurClient() const;
+	const char* RuePayante() const;
 
 	int FindClient(std::string name);
-
-	void Debug_DisplayClients();
 private:
 	LinkedList<Client> * clients;
 	std::string village;
