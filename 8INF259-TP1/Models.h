@@ -14,7 +14,6 @@ struct Client
 	int numero;
 	std::string nom;
 	LinkedList<Message> * messages;
-	Client *suivant;
 
 	Client()
 	{

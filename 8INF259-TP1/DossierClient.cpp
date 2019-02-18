@@ -1,3 +1,16 @@
+/******************************************************************
+* Titre:		Dossier de clients (8INF259\TP1)				  *
+*                                                                 *
+* Auteur(e)s:   Dominique Boivin (BOID31609701),				  *
+*				Jason Gilbert (GILJ05069703)				      *
+* Date:         2019-02-18										  *
+*                                                                 *
+* Description:  Gestion de messagerie électronique.				  *
+*																  *
+* Instructions: Les fichiers de données (clients, historique et   *
+*               transaction se trouvent dans                      *
+*               8INF259-TP1/8INF259-TP1/Resource Files/Data/      *
+******************************************************************/
 #include "pch.h"
 #include "DossierClient.h"
 
@@ -11,7 +24,7 @@ DossierClient::~DossierClient()
 	delete clients;
 }
 
-///O CLIENT HITORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
+///O CLIENT HISTORIQUE: ouvre les fichiers client "CLIENT" et historique "HISTORIQUE".
 void DossierClient::Ouvrir(const char * fichierClient, const char * fichierHistorique)
 {
 	//Paths formating
@@ -189,122 +202,141 @@ void DossierClient::Sauvegarder(const char * fichierClient, const char * fichier
 	ofs_historique.close();
 }
 
-///+ X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
+/// + X A N : ajouter un client X habitant à l'adresse A et au numéro N à la liste chaînée.
 void DossierClient::AjouterClient(const char * nom, const char * rue, const int numero)
 {
-	//Add client to the end of the list 
-
-	// Use the filled list **************
-	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
-	Client * ptr_courant = ptr_head;
-	Client * ptr_precedent;
-
-	// Tant que le suivant est pas null
-	while (ptr_courant->suivant != NULL) {
-
-		// Go to next
-		ptr_precedent = ptr_courant;
-		ptr_courant = ptr_courant->suivant;
+	// Tant que le suivant est pas null, aller au suivant
+	while (clients->IsInRange()) {
+		clients->MoveNext();
 	}
 
-	//Créer le nouveau client à la fin
-	ptr_courant->suivant = new Client;
-	ptr_courant = ptr_courant->suivant;
+	Client newClient;// = new Client();
+	newClient.nom = nom;
+	newClient.rue = rue;
+	newClient.numero = numero;
 
-	ptr_courant->nom = nom;
-	ptr_courant->rue = rue;
-	ptr_courant->numero = numero;
-
+	clients->Add(newClient);
 }
 
 /// - X : supprimer un client X de la liste chaînée.
 void DossierClient::SupprimerClient(const char * nom)
 {
-	// Use the filled list **************
-	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD
-	Client * ptr_courant = ptr_head;
-	Client * ptr_precedent = ptr_head;
-	int cpt = 0;
-	bool found = false;
+	int index;
 
-	// If first client is the one to delete
-	if (ptr_courant->nom == nom) {
+	//Retourne l'index si trouvé
+	index = FindClient(nom);
 
-		ptr_head = ptr_courant->suivant; // mettre la tête au deuxième
+	// Trouvé
+	if (index >= 0) {
 
-		//supprimer tous les messages du pointeur courant
-		ptr_courant->messages->Clear();
-
-		delete ptr_courant;
+		clients->Move(index);
+		clients->Remove();
 
 	}
 	else {
-
-		// Boucler pour demander les prochaines clés
-		// keep found in case it was not found
-		while (ptr_courant->suivant != NULL && found == false) {
-
-
-			if (ptr_courant->nom == nom) {
-				found = true;
-			}
-			else {
-				// Go to next
-				ptr_courant = ptr_courant->suivant;
-			}
-		}
-
-		if (!found) {
-			//TODO: Client was not found
-		}
+		std::cout << "Client non trouvé." << std::flush;
 	}
+
 }
 
 ///= X Y M : ajouter un message M envoyé du client X au client Y.
 void DossierClient::AjouterMessage(const char * nomClient, const char * nomDestination, const char * message)
 {
-	// Use the filled list **************
-	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
-	Client * ptr_courant = ptr_head;
+
+	Message newMessage;
+	newMessage.destinataire = nomDestination;
+	newMessage.message = message;
 	bool found = false;
+	int index;
 
-	// Tant que le suivant est pas null
-	while (ptr_courant->suivant != NULL) {
+	// Find client
+	index = FindClient(nomClient);
 
-		// Client trouvé
-		if (ptr_courant->nom == nomClient) {
-
-			found = true;
-			Message newMessage;
-			newMessage.destinataire = nomDestination;
-			newMessage.message = message;
-
-			// Add new message
-			ptr_courant->messages->Add(newMessage);
-		}
-		else {
-			// Go to next
-			ptr_courant = ptr_courant->suivant;
-		}
-
+	// Client found
+	if (index >= 0) {
+		// 8888888888888 does it work ?????
+		clients->GetValue().messages->Move.Tail;
+		clients->GetValue().messages->Add(newMessage);
 	}
-
-	if (!found) {
-		//TODO: do something if the client wasn't found
+	else {
+		std::cout << "Client non trouvé." << std::flush;
 	}
 
 }
 
-///& X Y : afficher le nombre de messages échanger entre le client X et Y.
+///& X Y : afficher le nombre de messages échangés entre le client X et Y.
 int DossierClient::NombreEchange(const char * X, const char * Y)
 {
-	//TODO
-	return 0;
+	int cptMsg = 0;
+	int indexClientX = 0, indexClientY = 0;
+
+	indexClientX = FindClient(X);
+	indexClientY = FindClient(X);
+
+	/***************
+	* Client X à Y *
+	***************/
+	clients->Move(indexClientX);
+
+	//While not at the end
+	while (clients->GetValue().messages->IsInRange()) {
+
+		// If a message to Y was found
+		if (clients->GetValue().messages->GetValue().destinataire == Y)
+			cptMsg++;
+
+		clients->GetValue().messages->MoveNext;
+	}
+
+	/***************
+	* Client Y à X *
+	***************/
+	clients->Move(indexClientY);
+
+	//While not at the end
+	while (clients->GetValue().messages->IsInRange()) {
+
+		// If a message to X was found
+		if (clients->GetValue().messages->GetValue().destinataire == X)
+			cptMsg++;
+
+		clients->GetValue().messages->MoveNext;
+	}
+
+	return cptMsg;
 }
 
 ///! : Afficher le client qui envoie le plus de messages.
 char * DossierClient::MeilleurClient() const
 {
+	int cptMsg, max = 0;
+	std::string bestClient;
+
+	// Loop through clients
+	while (clients->IsInRange()) {
+		cptMsg = 0;
+
+		//Loop through client's messages
+		while (clients->GetValue().messages->IsInRange()) {
+			cptMsg++;
+			clients->GetValue().messages->MoveNext();
+		}
+
+		// If current cpt > than the current max
+		if (cptMsg > max) {
+			max = cptMsg;
+			bestClient = clients->Current->Item.nom;
+		}
+
+		clients->MoveNext();
+	}
+
+	if (max = 0) {
+		std::cout << "Aucun message n'a ete envoye dans le village.";
+	}
+	else {
+		return bestClient;
+	}
 	//TODO
 	return nullptr;
 }
@@ -312,39 +344,33 @@ char * DossierClient::MeilleurClient() const
 ///$ : Afficher le nom de la rue la plus payante.
 char * DossierClient::RuePayante() const
 {
-	// Use the filled list **************
-	Client * ptr_head = 0; //TODO: USE THE OFFICIAL HEAD 888888888888888888888888888
-	Client * ptr_courant = ptr_head;
-	Message msg;
-	int cpt = 0, cptTmp = 0;
-	char * ruePayante;
-	bool found = false;
+	int total = 0, max = 0;
+	//char * bestStreet;
+	std::string bestStreet;
 
-	struct Rues{
-		char * nomRue;
-		int cptClients;
-		Rues * suivante;
-	};
-	
-	// Tant que le suivant est pas null
-	while (ptr_courant->suivant != NULL) {
+	//Loop through clients
+	while (clients->IsInRange()) {
 
-		bool fin = false;
-
-		while (fin == false) {
-			//ptr_courant->messages->Head
-			//TODO: CONTINUE HERE
+		//Loop through messages
+		while (clients->GetValue().messages->IsInRange()) {
+			total++;
+			clients->GetValue().messages->MoveNext();
 		}
 
+		if (total > max) {
+			max = total;
+			bestStreet = clients->GetValue().rue;
+		}
+		total = 0;
+		clients->MoveNext();
+	}
+
+	// Si aucun message n'a été envoyé
+	if (max == 0) {
+		std::cout << "Aucun message n'a ete envoye.";
 
 	}
 
-	if (!found) {
-		//TODO: do something if the client wasn't found
-	}
-
-
-	//TODO
 	return nullptr;
 }
 
