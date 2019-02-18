@@ -261,7 +261,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	//X -> Y
 	if (FindClient(X) < 0)
 	{
-		std::cout << "        Client not found" << std::endl;
+		std::cout << "        Client 1 not found" << std::endl;
 		return;
 	}
 	
@@ -281,7 +281,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	//Y -> X
 	if (FindClient(Y) < 0)
 	{
-		std::cout << "        Client not found" << std::endl;
+		std::cout << "        Client 2 not found" << std::endl;
 		return;
 	}
 	
