@@ -5,7 +5,8 @@
 *				Jason Gilbert (GILJ05069703)				      *
 * Date:         2019-02-18										  *
 *                                                                 *
-* Description:  Gestion de messagerie électronique.				  *
+* Description:  Gestion de messagerie électronique.	La page		  *
+*				Actuelle est la classe pour les dossiers clients. *
 *																  *
 * Instructions: Les fichiers de données (clients, historique et   *
 *               transaction se trouvent dans                      *
