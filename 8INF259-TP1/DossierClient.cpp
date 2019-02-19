@@ -369,6 +369,7 @@ std::string DossierClient::RuePayante()
 	return best;
 }
 
+/// Fonction servant à trouver un client avec son nom. Retourne son indice.
 int DossierClient::FindClient(std::string name)
 {
 	if (clients->Count() == 0)
@@ -387,6 +388,7 @@ int DossierClient::FindClient(std::string name)
 	return -1;
 }
 
+/// Fonction servant à trouver la valeur maximale d'une liste de int. Renvoie la valeur max.
 int DossierClient::FindMax(LinkedList<int> * values)
 {
 	if (values->Count() == 0)

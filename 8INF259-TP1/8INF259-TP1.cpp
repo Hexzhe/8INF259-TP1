@@ -49,47 +49,54 @@ int main()
 			continue;
 		}
 
-		//TODO: Looks liks messages can have space in them... We'll have to parse it manually to split the first 3 spaces then consider the rest of the line as the 3rd argument including spaces
 		//Parse the transaction
 		std::string transaction[4]; //max one instruction + 3 params
 		std::istringstream iss(line);
-		for (int i = 0; iss.good() && i < 4; i++)
-			iss >> transaction[i];
+		for (int i = 0; iss.good() && i < 4; i++) {
+
+			if (i < 3) 
+				iss >> transaction[i];
+			else {
+				//Getline -> pour accepter les espaces
+				std::getline(iss, transaction[i]);
+				transaction[i] = transaction[i].substr(1, transaction[i].length() - 1);
+			}
+		}
 
 		switch (transaction[0].c_str()[0])
 		{
 		case '-':
-			dossierClient->SupprimerClient(transaction[1].c_str()); 
+			dossierClient->SupprimerClient(transaction[1].c_str());
 			break;
 		case '+':
-			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str())); 
+			dossierClient->AjouterClient(transaction[1].c_str(), transaction[2].c_str(), atoi(transaction[3].c_str()));
 			break;
 		case '=':
-			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str()); 
+			dossierClient->AjouterMessage(transaction[1].c_str(), transaction[2].c_str(), transaction[3].c_str());
 			break;
 		case '&':
 		{
 			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
-			std::cout << "        result: " << result << std::endl;
+			std::cout << "        Nombre d'echanges: " << result << std::endl;
 			break;
 		}
 		case '!':
 		{
 			std::string result = dossierClient->MeilleurClient();
-			std::cout << "        result: " << result << std::endl;
+			std::cout << "        Meilleur client: " << result << std::endl;
 			break;
 		}
 		case '$':
 		{
 			std::string result = dossierClient->RuePayante();
-			std::cout << "        result: " << result << std::endl;
+			std::cout << "        Rue payante: " << result << std::endl;
 			break;
 		}
 		case 'O':
-			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str()); 
+			dossierClient->Ouvrir(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		case 'S':
-			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str()); 
+			dossierClient->Sauvegarder(transaction[1].c_str(), transaction[2].c_str());
 			break;
 		default:
 			std::cout << "        Nothing implemented for instruction \"" << transaction[0].c_str()[0] << "\"" << std::endl << "    Skipped" << std::endl;
