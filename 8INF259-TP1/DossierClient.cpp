@@ -231,7 +231,7 @@ void DossierClient::SupprimerClient(const char * nom)
 {
 	if (FindClient(nom) < 0)
 	{
-		std::cout << "        Client not found" << std::endl;
+		std::cout << "        " << nom << " not found" << std::endl;
 		return;
 	}
 
@@ -247,7 +247,7 @@ void DossierClient::AjouterMessage(const char * nomClient, const char * nomDesti
 
 	if (FindClient(nomClient) < 0)
 	{
-		std::cout << "        Client not found" << std::endl;
+		std::cout << "        " << nomClient << " not found" << std::endl;
 		return;
 	}
 
@@ -262,7 +262,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	//X -> Y
 	if (FindClient(X) < 0)
 	{
-		std::cout << "        Client 1 not found" << std::endl;
+		std::cout << "        " << X << " not found" << std::endl;
 		return -1;
 	}
 	
@@ -282,7 +282,7 @@ int DossierClient::NombreEchange(const char * X, const char * Y)
 	//Y -> X
 	if (FindClient(Y) < 0)
 	{
-		std::cout << "        Client 2 not found" << std::endl;
+		std::cout << "        " << Y << " not found" << std::endl;
 		return -1;
 	}
 	

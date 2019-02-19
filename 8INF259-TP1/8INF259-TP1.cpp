@@ -59,7 +59,7 @@ int main()
 			if (i < 3) 
 				iss >> transaction[i];
 			else {
-				//Getline -> pour accepter les espaces
+				//Accept spaces in last arg
 				std::getline(iss, transaction[i]);
 				transaction[i] = transaction[i].substr(1, transaction[i].length() - 1);
 			}
@@ -79,7 +79,7 @@ int main()
 		case '&':
 		{
 			int result = dossierClient->NombreEchange(transaction[1].c_str(), transaction[2].c_str());
-			std::cout << "        Nombre d'echanges: " << result << std::endl;
+			std::cout << "        Nombre d'echange(s): " << result << std::endl;
 			break;
 		}
 		case '!':
